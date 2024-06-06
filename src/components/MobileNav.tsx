@@ -18,23 +18,24 @@ const MobileNav = () => {
             <SheetContent>
                 <SheetHeader>
                     <SheetTitle>
-                        <span className="font-semibold">What are you planning today?</span>
+                        {user ? (
+                            <span className="flex flex-row gap-1 text-black">
+                                Hello {" "}
+                                {user.email}
+                            </span>
+                        ) : (
+                            <span className="font-semibold">What are you planning today?</span>
+                        )}
                     </SheetTitle>
                     <Separator/>
                 </SheetHeader>
-                <SheetDescription className="flex flex-col gap-5">
-                    <ol className="flex flex-col gap-3 pt-3 font-semibold text-black text-xl">
-                        <li>
-                            <Link href="/" className="flex hover:text-orange-300">
-                                Notes
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/dashboard" className="flex hover:text-orange-300">
-                                Dashboard
-                            </Link>
-                        </li>
-                    </ol>
+                <SheetDescription className="flex flex-col gap-3 pt-3 font-semibold text-black text-xl">
+                    <Link href="/" className="flex hover:text-orange-300">
+                        Notes
+                    </Link>
+                    <Link href="/dashboards" className="flex hover:text-orange-300">
+                        Dashboards
+                    </Link>
                     {user ? (
                         <Button className="flex-1 flex-row font-bold text-white hover:text-orange-300">
                         <Link href="/api/auth/logout" className="font-semibold">Log Out</Link>
