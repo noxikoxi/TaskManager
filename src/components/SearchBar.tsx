@@ -35,8 +35,8 @@ const SearchBar = ({onSubmit, placeholder, searchQuery} : Props) => {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="flex items-center flex-row gap-3 justify-between border-2 rounded-full p-2 ">
-                <Search strokeWidth={2.5} size={30} className="hidden md:block text-orange-200"/>
+                className="flex items-center flex-row gap-3 justify-between border-2 rounded-full p-2">
+                <Search strokeWidth={2.5} size={30} className="hidden md:block text-primary"/>
                 <FormField
                     control={form.control}
                     name="searchQuery"
@@ -51,7 +51,7 @@ const SearchBar = ({onSubmit, placeholder, searchQuery} : Props) => {
                     </FormItem>}
                 />
 
-                <Button type="submit" variant="ghost" className="rounded-full bg-orange-200 text-black font-semibold">
+                <Button type="submit" variant="default" className="rounded-full ">
                     Search
                 </Button>
             </form>

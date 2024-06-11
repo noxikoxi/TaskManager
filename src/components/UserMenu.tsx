@@ -23,7 +23,14 @@ const UserMenu = () => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator/>
                 <DropdownMenuItem>
-                    Profile
+                    <Link href="/dashboards/account/profile">
+                        Profile
+                    </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                    <Link href="/dashboards">
+                        Dashboards
+                    </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                     <Link href="/api/auth/logout" className="text-black hover:text-orange-200 font-bold text-xl">

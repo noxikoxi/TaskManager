@@ -9,27 +9,21 @@ const MainNav = () => {
     const { user } = useUser();
 
     return (
-        <div className="flex flex-row gap-5 items-center">
-            <Link
-                href="/dashboards"
-                className="text-white hover:text-amber-300 font-bold text-xl"
-            >
-                dashboards
-            </Link>
+        <nav className="flex flex-row gap-5 items-center">
             {user && (
-                <div className="flex flex-row gap-1 text-white hover:text-orange-200">
+                <div className="flex flex-row gap-1 hover:text-secondary ">
                     <SquareUserRound />
                     <UserMenu/>
                 </div>
             ) }
             {user ? ( <></>
             ) : (
-                <Link href="/api/auth/login" className="text-white hover:text-amber-300 font-bold text-xl">
+                <Link href="/api/auth/login" className=" hover:text-secondary font-bold text-xl">
                 Log In
                  </Link>
             )}
 
-        </div>
+        </nav>
     )
 }
 

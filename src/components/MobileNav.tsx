@@ -30,9 +30,6 @@ const MobileNav = () => {
                     <Separator/>
                 </SheetHeader>
                 <SheetDescription className="flex flex-col gap-3 pt-3 font-semibold text-black text-xl">
-                    <Link href="/" className="flex hover:text-orange-300">
-                        Notes
-                    </Link>
                     <Link href="/dashboards" className="flex hover:text-orange-300">
                         Dashboards
                     </Link>

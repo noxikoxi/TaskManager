@@ -1,9 +1,8 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "@/lib/dbConnect";
 import User from "@/lib/models/user";
 import {NextRequest} from "next/server";
 
-export const POST = async (req : NextRequest, res : NextApiResponse) => {
+export const POST = async (req : NextRequest) => {
     try{
         await dbConnect();
         const data = await req.json();
@@ -18,7 +17,7 @@ export const POST = async (req : NextRequest, res : NextApiResponse) => {
         const newUser = new User(data);
         await newUser.save();
 
-        return new Response("Created User", {status: 201});
+        return new Response(JSON.stringify(newUser), {status: 201});
     }catch(error){
         console.log("create user error")
         return new Response("Failed to create user", {status: 400});
