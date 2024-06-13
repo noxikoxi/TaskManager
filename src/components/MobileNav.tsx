@@ -1,41 +1,49 @@
 'use client'
 
 import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
-import {SquareMenu} from "lucide-react";
+import {CalendarDays, Car, LayoutDashboard, ListTodo, SquareMenu, UserRound} from "lucide-react";
 import {Separator} from "@/components/ui/separator";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
-import { useUser } from '@auth0/nextjs-auth0/client';
+import NavLink from "@/components/NavLink";
+import {useGetCurrentUser} from "@/lib/client/UserHooks";
+import Notifications from "@/components/Notifications";
 
 const MobileNav = () => {
-    const { user, error, isLoading } = useUser();
+    const { user, error, isLoading } = useGetCurrentUser();
 
     return (
         <Sheet>
             <SheetTrigger>
-                <SquareMenu className="text-orange-200" strokeWidth={2.0} size={40}/>
+                <SquareMenu className="text-secondary-foreground" strokeWidth={2.0} size={45}/>
             </SheetTrigger>
-            <SheetContent>
+            <SheetContent className="bg-secondary border-accent">
                 <SheetHeader>
                     <SheetTitle>
                         {user ? (
-                            <span className="flex flex-row gap-1 text-black">
+                            <span className="flex flex-row gap-1 text-2xl font-semibold">
                                 Hello {" "}
-                                {user.email}
+                                {user.username}
                             </span>
                         ) : (
                             <span className="font-semibold">What are you planning today?</span>
                         )}
                     </SheetTitle>
-                    <Separator/>
+                    <Separator className="bg-accent"/>
                 </SheetHeader>
                 <SheetDescription className="flex flex-col gap-3 pt-3 font-semibold text-black text-xl">
-                    <Link href="/dashboards" className="flex hover:text-orange-300">
-                        Dashboards
-                    </Link>
+                    <NavLink linkText="Profile" linkUrl="/dashboards/profile" Svg={UserRound}/>
+                    <NavLink linkText="Dashboards" linkUrl="/dashboards" Svg={LayoutDashboard}/>
+                    <NavLink linkText="Todos" linkUrl="/dashboards/todo" Svg={ListTodo}/>
+                    <NavLink linkText="Inspection & Insurance" linkUrl="/dashboards/insurance" Svg={Car}/>
+                    <NavLink linkText="Calendar" linkUrl="/dashboards/calendar" Svg={CalendarDays}/>
+                    <div className="ps-10">
+                        <Notifications/>
+                    </div>
+
                     {user ? (
-                        <Button className="flex-1 flex-row font-bold text-white hover:text-orange-300">
-                        <Link href="/api/auth/logout" className="font-semibold">Log Out</Link>
+                        <Button variant="ghost" className="my-10 flex-1 flex-row text-secondary-foreground bg-accent hover:bg-accent/90">
+                        <Link href="/api/auth/logout">Log Out</Link>
 
                     </Button>
                     ) : (
@@ -47,7 +55,6 @@ const MobileNav = () => {
                 </SheetDescription>
             </SheetContent>
         </Sheet>
-
     );
 }
 

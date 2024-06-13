@@ -34,12 +34,17 @@ export const PUT = async (req: NextRequest, {params} : {params : {dashboardId: s
         const description = data.description;
         const id = params.dashboardId;
 
+
+        if(Object.keys(data).length == 0){
+            return new Response("No data was sent", {status: 400});
+        }
+
         const existingDashboard = await Dashboard.findOne({_id: id});
 
         if(!existingDashboard){
             return new Response("Dashboard not found", {status: 404});
         }
-        if(note && note._id) { // It means update Note
+        if(note._id) { // It means update Note
             const notes = existingDashboard.notes;
 
             const existingNote = notes.find((n : Note) => note._id == n._id);
@@ -47,7 +52,7 @@ export const PUT = async (req: NextRequest, {params} : {params : {dashboardId: s
             existingNote.title = note.title;
             existingNote.content = note.content;
         }else{
-            if(note){
+            if(Object.keys(note).length != 0){
                 existingDashboard.notes.push(note);
             }
             if(name){

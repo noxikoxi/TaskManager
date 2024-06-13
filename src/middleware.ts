@@ -1,18 +1,14 @@
-import { NextResponse } from 'next/server';
+import {withMiddlewareAuthRequired} from "@auth0/nextjs-auth0/edge";
+import {NextResponse} from "next/server";
 
-export function middleware(request: Request) {
 
-    const url = new URL(request.url);
-    const origin = url.origin;
-    const pathname = url.pathname;
-    const requestHeaders = new Headers(request.headers);
-    requestHeaders.set('x-url', request.url);
-    requestHeaders.set('x-origin', origin);
-    requestHeaders.set('x-pathname', pathname);
+const middleware = withMiddlewareAuthRequired(async (req) => {
+  console.log('Middleware executed for request:', req.nextUrl.pathname);
+  return NextResponse.next();
+});
 
-    return NextResponse.next({
-        request: {
-            headers: requestHeaders,
-        }
-    });
-}
+export default middleware;
+
+export const config = {
+  matcher: ['/api/db/:path*']
+};

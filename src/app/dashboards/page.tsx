@@ -2,12 +2,20 @@
 
 import DashboardPreview from "@/components/DashboardPreview";
 import DashboardTopBar from "@/components/DashboardTopBar";
-import {useGetDashboards} from "@/lib/client/hooks";
+import {useGetDashboards} from "@/lib/client/DashboardHooks";
+import {useContext, useEffect} from "react";
+import {SideNavContext} from "@/lib/Context/SideNavContext";
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
 
-export default function Home() {
+export default withPageAuthRequired(function Home() {
 
     const {dashboards, isLoading} = useGetDashboards();
+    const {changeActive} = useContext(SideNavContext);
+
+    useEffect(() => {
+        changeActive("Dashboards")
+    }, []);
 
     if(isLoading){
         return <span>Loading...</span>
@@ -50,4 +58,4 @@ export default function Home() {
         </div>
     )
 
-}
+});

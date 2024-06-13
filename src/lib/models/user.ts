@@ -9,10 +9,28 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    name:{
+    username:{
         type: String
     },
     picture: {
+        type: String
+    },
+    firstName: {
+        type: String,
+    },
+    lastName: {
+        type: String,
+    },
+    aboutMe: {
+        type: String,
+    },
+    company: {
+        type: String,
+    },
+    country: {
+        type: String,
+    },
+    city : {
         type: String
     }
 })

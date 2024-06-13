@@ -12,11 +12,10 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {Textarea} from "@/components/ui/textarea";
-import {useCreateNote, useDeleteNote, useUpdateNote} from "@/lib/client/hooks";
-import {type} from "os";
+import {useCreateNote, useDeleteNote, useUpdateNote} from "@/lib/client/DashboardHooks";
 
 type Props = {
-    hideCard: Dispatch<SetStateAction<boolean>>,
+    showCard: Dispatch<SetStateAction<boolean>>,
     noteId?: string,
     noteTitle?: string,
     noteContent?: string
@@ -29,7 +28,7 @@ const formSchema = z.object({
 
 export type createNoteForm = z.infer<typeof formSchema>;
 
-const CreateNoteCard = ({hideCard, noteTitle, noteId, noteContent} : Props) => {
+const CreateNoteCard = ({showCard, noteTitle, noteId, noteContent} : Props) => {
     const form = useForm<createNoteForm>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -51,7 +50,7 @@ const CreateNoteCard = ({hideCard, noteTitle, noteId, noteContent} : Props) => {
             title : formData.title,
             content : formData.content
         });
-        hideCard(false);
+        showCard(false);
     }
 
     const handleUpdateNote = (formData: noteForm) => {
@@ -61,14 +60,14 @@ const CreateNoteCard = ({hideCard, noteTitle, noteId, noteContent} : Props) => {
             title: formData.title,
             content: formData.content
         })
-        hideCard(false);
+        showCard(false);
     }
 
     const handleDeleteNote = () => {
         if(noteId) {
             deleteNote({dashboardId: id, noteId});
         }
-        hideCard(false);
+        showCard(false);
     }
 
     const onSubmit = (formData: noteForm) => {
@@ -81,8 +80,8 @@ const CreateNoteCard = ({hideCard, noteTitle, noteId, noteContent} : Props) => {
 
     return (
         <div className="fixed bg-black w-full h-full top-0 left-0 bg-opacity-40 z-20">
-            <Card className="fixed top-1/3 left-1/2 md:top-1/4 md:left-1/3 w-[300px] md:w-[600px]">
-                <X  strokeWidth={2} size={32} className="cursor-pointer text-destructive absolute top-0 right-1" onClick={() => hideCard(false)} />
+            <Card className="fixed top-[15%] lg:top-1/3 lg:left-1/3 w-full lg:w-[600px] xl:w-[800px]">
+                <X  strokeWidth={2} size={32} className="cursor-pointer text-destructive absolute top-0 right-1" onClick={() => showCard(false)} />
                 <CardHeader>
                     <CardTitle>{noteId ? "Update Note" : "Create Note"}</CardTitle>
                     <CardDescription>Write anything you want</CardDescription>
@@ -93,7 +92,7 @@ const CreateNoteCard = ({hideCard, noteTitle, noteId, noteContent} : Props) => {
                         <form
                             onSubmit={form.handleSubmit(onSubmit)}
                         >
-                            <div className="grid grid-cols-3 gap-5">
+                            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
                                 <div>
                                     <FormField
                                         control = {form.control}

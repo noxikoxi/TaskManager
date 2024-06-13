@@ -1,21 +1,24 @@
+'use client'
+
 import Link from "next/link";
 import {ReactComponentLike} from "prop-types";
 import {clsx} from "clsx";
-import {Dispatch, SetStateAction} from "react";
+import {useContext} from "react";
+import {SideNavContext} from "@/lib/Context/SideNavContext";
 
 type Props = {
     linkText: string,
     linkUrl: string,
     Svg: ReactComponentLike,
-    active: string,
-    changeActiveFn: Dispatch<SetStateAction<string>>
 }
-const NavLink = ({linkText, linkUrl, Svg, active, changeActiveFn} : Props) => {
+const NavLink = ({linkText, linkUrl, Svg} : Props) => {
+
+    const {state} = useContext(SideNavContext);
+
     return (
         <Link
-            className={clsx("flex flex-row justify-start ps-10 gap-3 hover:text-background text-xl", {"text-background" : active === linkText})}
+            className={clsx("flex flex-row items-center justify-start ps-10 gap-3 hover:text-background text-xl", {"text-background" : state.activeLink === linkText})}
             href={linkUrl}
-            onClick={() => changeActiveFn(linkText)}
         >
             <Svg />
             <span>{linkText}</span>

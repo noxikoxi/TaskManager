@@ -7,11 +7,10 @@ import {useState} from "react";
 import { Button } from "./ui/button";
 import BreadCrumb from "@/components/BreadCrumb";
 import CreateNoteCard from "@/components/CreateNoteCard";
-import {createDashboard} from "@/lib/actions";
-import {Dashboard, dashboardForm} from "@/lib/types";
+import {dashboardForm} from "@/lib/types";
 
 type Props = {
-    options: {
+    options?: {
         Dashboards: boolean,
         Notes: boolean,
     }
@@ -29,21 +28,23 @@ const DashboardTopBar = ({options, linkList, textList, dashboard} : Props) => {
     const [showUpdateCard, setShowUpdateCard] = useState<boolean>(false );
 
     return (
-        <div className="flex flex-col w-full bg-background border-black">
-            <div className="mt-5 flex items-center justify-between">
+        <div className="md:relative absolute -mt-16 md:mt-0 top-1 left-20 w-auto md:top-0 md:left-0 bg-transparent flex flex-col md:w-full md:bg-background border-black">
+            <div className="md:my-6 my-3  flex items-center justify-between">
                 <div className="flex flex-row gap-5">
-                    <div className="ms-10">
+                    <div className="ms-0 md:ms-10 hidden lg:block">
                         <BreadCrumb linkList={linkList} textList={textList}/>
                     </div>
-                        <div className="flex flex-row gap-5">
+                    {options && (
+                        <div className="flex flex-row gap-4 lg:ms-0 md:ms-5 ms-0">
                             <Button
                                 size="sm"
-                                variant="default"
+                                variant="secondary"
                                 onClick={() =>setShowCreateCard(true)}
                             >
-                                {options.Dashboards ? "Create Dashboard" : "Create Note"}
+                                {options?.Dashboards ? "Create Dashboard" : "Create Note"}
                             </Button>
-                            {options.Notes && (
+
+                            {options?.Notes && (
                                 <Button
                                     size="sm"
                                     variant="secondary"
@@ -53,18 +54,18 @@ const DashboardTopBar = ({options, linkList, textList, dashboard} : Props) => {
                                 </Button>
                             )}
                         </div>
-
+                    )}
                 </div>
-                <div className="me-10 flex flex-row gap-3">
+                <div className="me-10 flex-row gap-3 hidden md:flex">
                     <Notifications/>
                 </div>
             </div>
-            <Separator className="mt-4 bg-foreground"/>
-            {options.Dashboards && showCreateCard && <CreateDashboardCard hideCard={setShowCreateCard}/>}
-            {options.Notes && dashboard && showUpdateCard && <CreateDashboardCard
-                hideCard={setShowUpdateCard} id={dashboard.id} name={dashboard.name} description={dashboard.description}
+            <Separator className="bg-foreground hidden md:block"/>
+            {options?.Dashboards && showCreateCard && <CreateDashboardCard showCard={setShowCreateCard}/>}
+            {options?.Notes && dashboard && showUpdateCard && <CreateDashboardCard
+                showCard={setShowUpdateCard} id={dashboard.id} name={dashboard.name} description={dashboard.description}
             />}
-            {options.Notes && showCreateCard && <CreateNoteCard hideCard={setShowCreateCard}/>}
+            {options?.Notes && showCreateCard && <CreateNoteCard showCard={setShowCreateCard}/>}
         </div>
 
     )

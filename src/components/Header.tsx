@@ -11,7 +11,7 @@ const Header = () => {
         <div className="bg-background py-5">
             <div className="container flex flex-row items-center justify-between mx-auto">
                 <Link className="hidden md:block font-semibold text-4xl tracking-tight" href="/">
-                    Notes
+                    Task Manager
                 </Link>
                 <div className="md:hidden block">
                     <MobileNav/>

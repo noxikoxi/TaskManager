@@ -1,24 +1,35 @@
 'use client'
 
 import {useMutation, useQuery, useQueryClient} from "react-query";
-import {
-    createDashboard,
-    deleteDashboard,
-    deleteNote,
-    fetchDashboard,
-    getDashboards,
-    updateDashboard
-} from "@/lib/actions";
 import {toast} from "sonner";
 import {Dashboard, dashboardForm, noteForm} from "@/lib/types";
-import {UserProfile, useUser} from "@auth0/nextjs-auth0/client";
-import {useEffect} from "react";
+import {getSession} from "@auth0/nextjs-auth0";
 
-export const useGetDashboard = (userId: string) => {
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+export const useGetDashboard = (id: string) => {
+
+    const createGetDashboardRequest = async (id: string) => {
+
+        const response = await fetch(API_BASE_URL + "/dashboard/one/" + id, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if(!response.ok){
+            throw new Error();
+        }
+
+        return response.json();
+
+    }
 
     const {data : dashboard, isLoading, error} = useQuery(
-        ["fetchCurrentDashboard", userId],
-        () => fetchDashboard(userId)
+        ["fetchCurrentDashboard", id],
+        () => createGetDashboardRequest(id)
     );
 
     if(error){
@@ -33,11 +44,26 @@ export const useGetDashboard = (userId: string) => {
 }
 
 export const useGetDashboards = () => {
-    const {user, isLoading : isUserLoading} = useUser();
+    const createGetDashboardsRequest = async () => {
+
+        const response = await fetch(API_BASE_URL + "/dashboard/", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if(!response.ok){
+            throw new Error();
+        }
+
+        return response.json();
+
+    }
 
     const {data, error, isLoading} = useQuery(
-        ["fetchCurrentDashboard", user?.sub],
-        () => getDashboards(user?.sub)
+        ["fetchCurrentDashboard", ],
+        () => createGetDashboardsRequest()
     );
 
     if(error){
@@ -46,19 +72,61 @@ export const useGetDashboards = () => {
 
     const dashboards : (Dashboard & {_id: string})[] | undefined = data;
 
-    const Loading = isLoading && isUserLoading
 
     return {
         dashboards,
-        isLoading : Loading
+        isLoading
     }
+}
+
+const  createUpdateDashboardRequest = async (
+    {name, description, id, noteTitle, noteContent, noteId} : {
+        name?: string,
+        description?: string,
+        id: string,
+        noteTitle?: string,
+        noteContent? : string
+        noteId? : string
+    }) => {
+    let data = {
+        name,
+        description,
+        note: {
+            title: noteTitle,
+            content: noteContent
+        }
+    }
+    if(noteId){
+        data = Object.assign(data, {
+            note : {
+                title: noteTitle,
+                content: noteContent,
+                _id: noteId
+            }
+        })
+    }
+
+    const response = await fetch(API_BASE_URL + "/dashboard/one/" + id, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+
+    if(!response.ok){
+        throw new Error("Failed to update Dashboard: " + await response.text());
+    }
+
+    return await response.json();
+
 }
 
 export const useUpdateDashboard = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: updateDashboard,
+        mutationFn: createUpdateDashboardRequest,
         onSuccess: () => {
             toast.success("Successfully updated note!");
             queryClient.invalidateQueries('fetchCurrentDashboard');
@@ -88,7 +156,7 @@ export const useCreateNote = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: updateDashboard,
+        mutationFn: createUpdateDashboardRequest,
         onSuccess: () => {
             toast.success("Successfully created note!");
             queryClient.invalidateQueries('fetchCurrentDashboard');
@@ -118,7 +186,7 @@ export const useUpdateNote = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: updateDashboard,
+        mutationFn: createUpdateDashboardRequest,
         onSuccess: () => {
             toast.success("Successfully updated note!");
             queryClient.invalidateQueries('fetchCurrentDashboard');
@@ -148,8 +216,34 @@ export const useUpdateNote = () => {
 export const useCreateDashboard = () => {
     const queryClient = useQueryClient();
 
+    const createCreateDashboardRequest = async (formData: dashboardForm) => {
+        const dashboard: Dashboard = {
+            createdAt: new Date(),
+            name: formData.name,
+            description: formData.description,
+            userId: "", // will be fetched at server api
+            notes: []
+        }
+
+        const response = await fetch(API_BASE_URL + '/dashboard', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dashboard)
+        })
+
+        if(!response.ok){
+            throw new Error();
+        }
+
+        return await response.json();
+
+    }
+
+
     const mutation = useMutation({
-        mutationFn: createDashboard,
+        mutationFn: createCreateDashboardRequest,
         onSuccess: () => {
             toast.success("Successfully created dashboard!");
             queryClient.invalidateQueries('fetchCurrentDashboard');
@@ -175,8 +269,23 @@ export const useCreateDashboard = () => {
 export const useDeleteDashboard = () => {
     const queryClient = useQueryClient();
 
+    const createDeleteDashboardRequest = async (id: string) => {
+        const response = await fetch(API_BASE_URL + "/dashboard/one/" + id, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if(!response.ok){
+            throw new Error();
+        }
+
+        return response.status == 200;
+    }
+
     const mutation = useMutation({
-        mutationFn: deleteDashboard,
+        mutationFn: createDeleteDashboardRequest,
         onSuccess: () => {
             toast.success("Successfully deleted dashboard!");
             queryClient.invalidateQueries('fetchCurrentDashboard');
@@ -201,8 +310,23 @@ export const useDeleteDashboard = () => {
 export const useDeleteNote = () => {
     const queryClient = useQueryClient();
 
+    const createDeleteNoteRequest = async ({dashboardId, noteId}: {dashboardId: string, noteId: string}) => {
+        const response = await fetch(API_BASE_URL + "/dashboard/one/" + dashboardId + "/" + noteId, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if(!response.ok){
+            throw new Error();
+        }
+
+        return response.status == 200;
+    }
+
     const mutation = useMutation({
-        mutationFn: deleteNote,
+        mutationFn: createDeleteNoteRequest,
         onSuccess: () => {
             toast.success("Successfully deleted note!");
             queryClient.invalidateQueries('fetchCurrentDashboard');
@@ -223,3 +347,6 @@ export const useDeleteNote = () => {
         isLoading
     }
 }
+
+
+

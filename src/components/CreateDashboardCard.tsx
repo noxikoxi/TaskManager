@@ -10,11 +10,11 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {X} from "lucide-react";
 import {dashboardForm} from "@/lib/types";
-import {useCreateDashboard, useUpdateDashboard} from "@/lib/client/hooks";
+import {useCreateDashboard, useUpdateDashboard} from "@/lib/client/DashboardHooks";
 
 
 type Props = {
-    hideCard: Dispatch<SetStateAction<boolean>>,
+    showCard: Dispatch<SetStateAction<boolean>>,
     id?: string,
     name?: string,
     description?: string,
@@ -27,7 +27,7 @@ const formSchema = z.object({
 
 export type createDashboardForm = z.infer<typeof formSchema>;
 
-const CreateDashboardCard = ({hideCard, id, name, description} : Props) => {
+const CreateDashboardCard  = ({showCard, id, name, description} : Props) => {
     const form = useForm<createDashboardForm>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -42,18 +42,17 @@ const CreateDashboardCard = ({hideCard, id, name, description} : Props) => {
     const handleSubmit = (data: dashboardForm) => {
         if(id){ // updating
             updateDashboard({...data, id});
-            hideCard(false);
+            showCard(false)
         }else{ // creating
             createDashboard(data);
-            hideCard(false);
+            showCard(false)
         }
-
     }
 
     return (
         <div className="fixed bg-black w-full h-full top-0 left-0 bg-opacity-40 z-20">
-            <Card className="fixed top-1/3 left-1/2 w-[300px]">
-                <X  strokeWidth={2} size={32} className="cursor-pointer text-destructive absolute top-0 right-1" onClick={() => hideCard(false)} />
+            <Card className="fixed md:top-1/3 md:left-[35%] md:w-[500px] top-1/3 right-1 w-full">
+                <X  strokeWidth={2} size={32} className="cursor-pointer text-destructive absolute top-0 right-1" onClick={() => showCard(false)} />
                 <CardHeader>
                     <CardTitle>{id ? "Edit Your Dashboard" : "Create Your Dashboard"}</CardTitle>
                     <CardDescription>On dashboard you can write your notes</CardDescription>

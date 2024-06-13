@@ -4,7 +4,7 @@ import {Separator} from "@/components/ui/separator";
 import React from "react";
 import {useRouter} from "next/navigation";
 import DeletePopover from "@/components/DeletePopover";
-import {useDeleteDashboard} from "@/lib/client/hooks";
+import {useDeleteDashboard} from "@/lib/client/DashboardHooks";
 
 type Props = {
     id : string

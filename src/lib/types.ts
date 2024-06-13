@@ -1,8 +1,14 @@
 export type User = {
-    name: string,
+    username: string,
     email: string,
     id: string,
     picture?: string,
+    firstName? :string,
+    lastName?: string,
+    aboutMe?: string,
+    company?: string,
+    city? : string,
+    country? : string
 }
 
 export type Note = {
@@ -29,4 +35,14 @@ export type dashboardForm = {
 export type noteForm = {
     title: string,
     content : string
+}
+
+export type UpdateUserRequest = {
+    username: string;
+    company: string;
+    city: string;
+    country: string;
+    aboutMe :string;
+    firstName : string;
+    lastName : string;
 }

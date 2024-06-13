@@ -5,11 +5,12 @@ import {toast} from "sonner";
 import { Note} from "@/lib/types";
 import NoteCard from "@/components/NoteCard";
 import DashboardTopBar from "@/components/DashboardTopBar";
-import {useGetDashboard} from "@/lib/client/hooks";
+import {useGetDashboard} from "@/lib/client/DashboardHooks";
 import CreateNoteCard from "@/components/CreateNoteCard";
 import {useState} from "react";
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
-export default function Home() {
+export default withPageAuthRequired(function Home() {
     const pathname = usePathname();
     const id = pathname.split("/")[2];
     const router = useRouter();
@@ -28,8 +29,6 @@ export default function Home() {
         return <span>Loading Notes...</span>
     }
 
-
-
     return (
         <div className="relative inset-0 h-full w-full bg-white bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
             <DashboardTopBar
@@ -45,7 +44,7 @@ export default function Home() {
                     description: dashboard.description
                 }}
             />
-            {dashboard.notes.length == 0 ? (
+            {dashboard.notes.length == 0 && !isLoading ? (
                 <div className="flex flex-1 flex-row justify-center">
                     <div className="flex flex-col items-center gap-5 p-5">
                         <p className="font-semibold text-black text-xl"> You do not have any notes yet</p>
@@ -68,11 +67,11 @@ export default function Home() {
                 </div>
             )}
             {showUpdateCard && <CreateNoteCard
-                hideCard={setShowUpdateCard}
+                showCard={setShowUpdateCard}
                 noteId={selectedNote?._id}
                 noteTitle={selectedNote?.title}
                 noteContent={selectedNote?.content}
             />}
         </div>
     )
-}
+});

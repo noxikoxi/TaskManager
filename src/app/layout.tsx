@@ -8,6 +8,7 @@ import ReactQueryProvider from "@/lib/Providers/QueryClientProvider";
 import {Toaster} from "@/components/ui/sonner";
 import {QueryClient} from "react-query";
 import {getTestReqInfo} from "next/dist/experimental/testmode/context";
+import {AppProvider} from "@/lib/Context/SideNavContext";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -30,10 +31,12 @@ export default function RootLayout({
                 <UserProvider>
                     <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
                         <ReactQueryProvider>
-                            <main>
-                                {children}
-                            </main>
-                            <Toaster/>
+                            <AppProvider>
+                                <main>
+                                    {children}
+                                </main>
+                                <Toaster/>
+                            </AppProvider>
                         </ReactQueryProvider>
                     </body>
                 </UserProvider>
