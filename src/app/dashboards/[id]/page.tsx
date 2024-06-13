@@ -8,9 +8,8 @@ import DashboardTopBar from "@/components/DashboardTopBar";
 import {useGetDashboard} from "@/lib/client/DashboardHooks";
 import CreateNoteCard from "@/components/CreateNoteCard";
 import {useState} from "react";
-import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
-export default withPageAuthRequired(function Home() {
+export default function Home() {
     const pathname = usePathname();
     const id = pathname.split("/")[2];
     const router = useRouter();
@@ -74,4 +73,4 @@ export default withPageAuthRequired(function Home() {
             />}
         </div>
     )
-});
+};

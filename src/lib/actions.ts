@@ -1,9 +1,9 @@
 'use server'
 
-import {getAccessToken, getSession} from "@auth0/nextjs-auth0";
-import {Dashboard, dashboardForm, UpdateUserRequest, User} from "@/lib/types";
+import {getSession} from "@auth0/nextjs-auth0";
+import {User} from "@/lib/types";
 
-const API_BASE_URL = process.env.API_BASE_URL;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const createUser = async () => {
     const session = await getSession();
@@ -15,8 +15,8 @@ export const createUser = async () => {
             username: sessionUser.nickname,
             picture: sessionUser.picture
         }
-        const response = await fetch(API_BASE_URL + '/user', {
-            method: "Post",
+        const response = await fetch(API_BASE_URL + '/create-user', {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },

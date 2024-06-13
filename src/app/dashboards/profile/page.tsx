@@ -6,11 +6,10 @@ import {useContext, useEffect} from "react";
 import {SideNavContext} from "@/lib/Context/SideNavContext";
 import user_bg from "../../../../public/user_bg5.svg";
 import Image from "next/image";
-import { withPageAuthRequired} from "@auth0/nextjs-auth0/client";
 import {CircleUserRound} from "lucide-react";
 
 
-export default withPageAuthRequired(function Home() {
+export default function Home() {
 
     const {user, isLoading: getIsLoading} = useGetCurrentUser();
 
@@ -62,4 +61,4 @@ export default withPageAuthRequired(function Home() {
             </div>
         </div>
     )
-});
+};

@@ -2,10 +2,10 @@ import {handleAuth, handleCallback, handleLogin, handleLogout, handleProfile} fr
 
 
 export const GET = handleAuth({
-    login : handleLogin,
-    //     {
-    //         returnTo: "/dashboards",
-    //     }),
+    login : handleLogin(
+        {
+            returnTo: "/logged",
+        }),
     logout: handleLogout,
     profile: handleProfile,
     callback: handleCallback,

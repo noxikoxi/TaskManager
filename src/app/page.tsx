@@ -1,18 +1,9 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import {createUser} from "@/lib/actions";
-import {getSession} from "@auth0/nextjs-auth0";
 
 let alreadyCreatedUser = false;
 
 export default async function Home() {
-    const session = await getSession();
-
-    if(session?.user && !alreadyCreatedUser) {
-        if(await createUser()){
-            alreadyCreatedUser = true;
-        }
-    }
   return (
       <div className="w-full h-screen flex flex-col">
           <Header/>

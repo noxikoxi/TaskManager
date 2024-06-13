@@ -8,7 +8,7 @@ import {SideNavContext} from "@/lib/Context/SideNavContext";
 import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
 
-export default withPageAuthRequired(function Home() {
+export default function Home() {
 
     const {dashboards, isLoading} = useGetDashboards();
     const {changeActive} = useContext(SideNavContext);
@@ -58,4 +58,4 @@ export default withPageAuthRequired(function Home() {
         </div>
     )
 
-});
+};
