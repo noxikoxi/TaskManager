@@ -4,7 +4,7 @@ import User from "@/lib/models/user";
 import {User as UserType} from "@/lib/types";
 import {NextApiRequest} from "next";
 
-export const GET =  async function (req: NextApiRequest, {params} : {params : {id: string}})  {
+export const GET =  async function (req: NextRequest, {params} : {params : {id: string}})  {
     try{
         await dbConnect();
         const id = params.id;

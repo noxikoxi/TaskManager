@@ -36,7 +36,7 @@ export const POST = async (req : NextRequest) => {
     }
 };
 
-export const GET = async(req: NextApiRequest) => {
+export const GET = async(req: NextRequest) => {
     try{
         await dbConnect();
         const session = await getSession();
