@@ -9,7 +9,7 @@ export default withPageAuthRequired(function Home() {
     const {changeActive} = useContext(SideNavContext);
 
     useEffect(() => {
-        changeActive("Insurance")
+        changeActive("insurance")
     }, []);
 
     return (
