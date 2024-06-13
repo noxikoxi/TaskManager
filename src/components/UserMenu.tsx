@@ -23,7 +23,7 @@ const UserMenu = () => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator/>
                 <DropdownMenuItem>
-                    <Link href="/dashboards/account/profile">
+                    <Link href="/dashboards/profile">
                         Profile
                     </Link>
                 </DropdownMenuItem>
