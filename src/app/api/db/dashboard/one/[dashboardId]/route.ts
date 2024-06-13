@@ -4,7 +4,7 @@ import Dashboard from "@/lib/models/dashboard";
 import {NextApiRequest} from "next";
 import {NextRequest} from "next/server";
 
-export const GET = async(req: NextApiRequest, {params} : {params : {dashboardId: string}}) => {
+export const GET = async(req: NextRequest, {params} : {params : {dashboardId: string}}) => {
     try{
         await dbConnect();
         const id = params.dashboardId;
