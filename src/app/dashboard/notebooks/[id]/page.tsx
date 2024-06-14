@@ -51,7 +51,7 @@ export default function Home() {
                     </div>
                 </div>
             ) : (
-                <div className="p-10 grid gap-5 grid-cols-[repeat(auto-fill,minmax(250px,_1fr))]">
+                <div className="p-10 grid gap-5 grid-cols-[repeat(auto-fill,minmax(350px,_1fr))]">
                     {notebook.notes.map((note : Note) => (
                         <NoteCard
                             key={note._id}

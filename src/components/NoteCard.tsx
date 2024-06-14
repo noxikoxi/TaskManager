@@ -28,7 +28,7 @@ const NoteCard = ({title, content, createdAt, selectNote, id, showEditing} : Pro
 
     return (
         <Card
-            className="cursor-pointer hover:outline hover:outline-primary shadow max-h-[250px] overflow-auto relative"
+            className="cursor-pointer hover:outline hover:outline-primary shadow max-h-[350px] overflow-auto relative"
             onClick={() => handleSelect()}
         >
 
@@ -39,8 +39,8 @@ const NoteCard = ({title, content, createdAt, selectNote, id, showEditing} : Pro
                 <Separator/>
             </div>
             <div className="flex flex-col justify-between">
-                <CardContent className="mt-4 z-0">
-                    <pre >
+                <CardContent  className="text-sm w-full">
+                    <pre className="whitespace-pre-wrap">
                         {content}
                     </pre>
                 </CardContent>
