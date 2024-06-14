@@ -66,8 +66,8 @@ You may check this app:
 ## Usage
 
 1. **User Profiles**: Register a new user or log in with your existing credentials.
-2. **Notebooks**: Create a new notebook by navigating to the "Notebooks" section and clicking "Add Notebook".
-3. **Notes**: Within a notebook, click "Add Note" to create a new note.
+2. **Notebooks**: Create a new notebook by navigating to the "Notebooks" section and clicking "Create Notebook".
+3. **Notes**: Within a notebook, click "Create Note" to create a new note.
 
 ## Roadmap
 
