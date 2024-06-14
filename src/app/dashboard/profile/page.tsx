@@ -52,7 +52,9 @@ export default function Home() {
                         </Avatar>
                         <span className="font-semibold text-xl">{user.firstName || "First Name"} {user.lastName || "Last Name"}</span>
                         <span className="text-accent">@{user.username || "username"}</span>
-                        <pre>&quot;{user.aboutMe || "About Me"}&quot;</pre>
+                        <div className="w-full p-4">
+                            <pre className="whitespace-pre-wrap text-sm italic">{user.aboutMe || "About Me"}</pre>
+                        </div>
                     </div>
                 </div>
                 <div className="col-span-3 lg:col-span-2 row-span-3">
