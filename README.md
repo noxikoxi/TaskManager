@@ -2,6 +2,9 @@
 
 Welcome to the Task Manager project! This project is a work in progress, aiming to provide a comprehensive solution for managing tasks, notes, and personal information. Currently, it includes functionalities for creating notebooks and notes, as well as user profiles. Future plans include implementing TODO lists, calendar tabs, insurance and car maintenance reminders, and more.
 
+You may check this app: 
+- [https://task-manager-two-pi.vercel.app](https://task-manager-two-pi.vercel.app)
+
 ## Table of Contents
 
 - [Features](#features)
