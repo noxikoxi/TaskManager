@@ -4,7 +4,7 @@ import {Separator} from "@/components/ui/separator";
 import React from "react";
 import {useRouter} from "next/navigation";
 import DeletePopover from "@/components/DeletePopover";
-import {useDeleteDashboard} from "@/lib/client/DashboardHooks";
+import {useDeleteNotebook} from "@/lib/client/NotebookHooks";
 
 type Props = {
     id : string
@@ -13,22 +13,22 @@ type Props = {
     createdAt?: Date,
     notesNumber: number,
 }
-const DashboardPreview = ({id, title, description, createdAt, notesNumber} : Props) => {
+const NotebookPreview = ({id, title, description, createdAt, notesNumber} : Props) => {
     const router = useRouter();
 
-    const { deleteDashboard} = useDeleteDashboard();
+    const { deleteNotebook} = useDeleteNotebook();
 
     const onDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         event.stopPropagation();
-        deleteDashboard(id);
+        deleteNotebook(id);
     }
 
 
     return (
         <Card
             className="cursor-pointer hover:outline hover:outline-primary shadow-md relative"
-            onClick={() => router.push("/dashboards/" + id)}
+            onClick={() => router.push("/dashboard/notebooks/" + id)}
         >
             <DeletePopover onClick={onDelete} className="absolute top-2 right-2 rounded-full"/>
             <CardHeader className="pb-4">
@@ -49,4 +49,4 @@ const DashboardPreview = ({id, title, description, createdAt, notesNumber} : Pro
     )
 }
 
-export default DashboardPreview;
+export default NotebookPreview;

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const dashboardSchema = new mongoose.Schema({
+const notebookSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -34,4 +34,4 @@ const dashboardSchema = new mongoose.Schema({
     }
 })
 
-export default mongoose.models.Dashboard || mongoose.model("Dashboard", dashboardSchema);
+export default mongoose.models.Notebook || mongoose.model("Notebook", notebookSchema);

@@ -18,7 +18,7 @@ export type Note = {
     createdAt: Date,
 }
 
-export type Dashboard = {
+export type Notebook = {
     _id?: string,
     name: string,
     description?: string,
@@ -27,7 +27,7 @@ export type Dashboard = {
     notes: [] | Note[],
 }
 
-export type dashboardForm = {
+export type NotebookForm = {
     name: string,
     description? : string
 }

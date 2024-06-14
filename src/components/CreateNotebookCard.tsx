@@ -9,8 +9,8 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {X} from "lucide-react";
-import {dashboardForm} from "@/lib/types";
-import {useCreateDashboard, useUpdateDashboard} from "@/lib/client/DashboardHooks";
+import {NotebookForm} from "@/lib/types";
+import {useCreateNotebook, useUpdateNotebook} from "@/lib/client/NotebookHooks";
 
 
 type Props = {
@@ -25,10 +25,10 @@ const formSchema = z.object({
     description: z.string().optional(),
 })
 
-export type createDashboardForm = z.infer<typeof formSchema>;
+export type createNotebookForm = z.infer<typeof formSchema>;
 
-const CreateDashboardCard  = ({showCard, id, name, description} : Props) => {
-    const form = useForm<createDashboardForm>({
+const CreateNotebookCard  = ({showCard, id, name, description} : Props) => {
+    const form = useForm<createNotebookForm>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: name || "",
@@ -36,15 +36,15 @@ const CreateDashboardCard  = ({showCard, id, name, description} : Props) => {
         },
     });
 
-    const {createDashboard, isLoading: isLoadingCreating} = useCreateDashboard();
-    const {updateDashboard, isLoading: isLoadingUpdating} = useUpdateDashboard();
+    const {createNotebook, isLoading: isLoadingCreating} = useCreateNotebook();
+    const {updateNotebook, isLoading: isLoadingUpdating} = useUpdateNotebook();
 
-    const handleSubmit = (data: dashboardForm) => {
+    const handleSubmit = (data: NotebookForm) => {
         if(id){ // updating
-            updateDashboard({...data, id});
+            updateNotebook({...data, id});
             showCard(false)
         }else{ // creating
-            createDashboard(data);
+            createNotebook(data);
             showCard(false)
         }
     }
@@ -55,7 +55,7 @@ const CreateDashboardCard  = ({showCard, id, name, description} : Props) => {
                 <X  strokeWidth={2} size={32} className="cursor-pointer text-destructive absolute top-0 right-1" onClick={() => showCard(false)} />
                 <CardHeader>
                     <CardTitle>{id ? "Edit Your Dashboard" : "Create Your Dashboard"}</CardTitle>
-                    <CardDescription>On dashboard you can write your notes</CardDescription>
+                    <CardDescription>On notebook you can write your notes</CardDescription>
                     <Separator/>
                 </CardHeader>
                 <CardContent>
@@ -70,7 +70,7 @@ const CreateDashboardCard  = ({showCard, id, name, description} : Props) => {
                                     <FormItem>
                                         <FormLabel>Name</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="Dashboard name" {...field} />
+                                            <Input placeholder="Notebook name" {...field} />
                                         </FormControl>
                                         <FormMessage/>
                                     </FormItem>
@@ -83,7 +83,7 @@ const CreateDashboardCard  = ({showCard, id, name, description} : Props) => {
                                     <FormItem>
                                         <FormLabel>Description</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="My new dashboard" {...field} />
+                                            <Input placeholder="My new notebook" {...field} />
                                         </FormControl>
                                         <FormMessage/>
                                     </FormItem>
@@ -95,11 +95,11 @@ const CreateDashboardCard  = ({showCard, id, name, description} : Props) => {
                         </form>
                     </Form>
                 </CardContent>
-                {isLoadingCreating && <p>Creating dashboard...</p>}
-                {isLoadingUpdating && <p>Updating dashboard...</p>}
+                {isLoadingCreating && <p>Creating notebook...</p>}
+                {isLoadingUpdating && <p>Updating notebook...</p>}
             </Card>
         </div>
     )
 }
 
-export default CreateDashboardCard;
+export default CreateNotebookCard;

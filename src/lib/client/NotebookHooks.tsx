@@ -2,17 +2,16 @@
 
 import {useMutation, useQuery, useQueryClient} from "react-query";
 import {toast} from "sonner";
-import {Dashboard, dashboardForm, noteForm} from "@/lib/types";
-import {getSession} from "@auth0/nextjs-auth0";
+import {Notebook, NotebookForm, noteForm} from "@/lib/types";
 
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export const useGetDashboard = (id: string) => {
+export const useGetNotebook = (id: string) => {
 
-    const createGetDashboardRequest = async (id: string) => {
+    const createGetNotebookRequest = async (id: string) => {
 
-        const response = await fetch(API_BASE_URL + "/dashboard/one/" + id, {
+        const response = await fetch(API_BASE_URL + "/dashboard/notebook/" + id, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -27,31 +26,33 @@ export const useGetDashboard = (id: string) => {
 
     }
 
-    const {data : dashboard, isLoading, error} = useQuery(
-        ["fetchCurrentDashboard", id],
-        () => createGetDashboardRequest(id)
+    const {data : notebook, isLoading, error} = useQuery(
+        ["fetchCurrentNotebook", id],
+        () => createGetNotebookRequest(id)
     );
 
     if(error){
-        toast.error("Something went wrong, please try again: " + error.toString());
+        toast.error("Something went wrong, please try again: ");
     }
 
     return {
-        dashboard,
+        notebook,
         isLoading,
         error
     }
 }
 
-export const useGetDashboards = () => {
-    const createGetDashboardsRequest = async () => {
+export const useGetNotebooks = () => {
+    const createGetNotebooksRequest = async () => {
 
-        const response = await fetch(API_BASE_URL + "/dashboard/", {
+        const response = await fetch(API_BASE_URL + "/dashboard/notebook", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
             },
         });
+
+        console.log(response);
 
         if(!response.ok){
             throw new Error();
@@ -61,25 +62,28 @@ export const useGetDashboards = () => {
 
     }
 
+
+
     const {data, error, isLoading} = useQuery(
-        ["fetchCurrentDashboard", ],
-        () => createGetDashboardsRequest()
+        ["fetchNotebooks"],
+        () => createGetNotebooksRequest()
     );
+
 
     if(error){
         toast.error("Something went wrong, please try again: " + error.toString());
     }
 
-    const dashboards : (Dashboard & {_id: string})[] | undefined = data;
+    const notebooks : (Notebook & {_id: string})[] | undefined = data;
 
 
     return {
-        dashboards,
+        notebooks,
         isLoading
     }
 }
 
-const  createUpdateDashboardRequest = async (
+const  createUpdateNotebookRequest = async (
     {name, description, id, noteTitle, noteContent, noteId} : {
         name?: string,
         description?: string,
@@ -106,7 +110,7 @@ const  createUpdateDashboardRequest = async (
         })
     }
 
-    const response = await fetch(API_BASE_URL + "/dashboard/one/" + id, {
+    const response = await fetch(API_BASE_URL + "/dashboard/notebook/" + id, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -115,28 +119,28 @@ const  createUpdateDashboardRequest = async (
     })
 
     if(!response.ok){
-        throw new Error("Failed to update Dashboard: " + await response.text());
+        throw new Error("Failed to update notbook: ");
     }
 
     return await response.json();
 
 }
 
-export const useUpdateDashboard = () => {
+export const useUpdateNotebook = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: createUpdateDashboardRequest,
+        mutationFn: createUpdateNotebookRequest,
         onSuccess: () => {
             toast.success("Successfully updated note!");
-            queryClient.invalidateQueries('fetchCurrentDashboard');
+            queryClient.invalidateQueries('fetchCurrentNotebook');
         },
         onError: () => {
             toast.error("Something went wrong, please try again: ");
         },
     });
 
-    const updateDash = ({id, name, description} : dashboardForm & {id: string}) => {
+    const update = ({id, name, description} : NotebookForm & {id: string}) => {
         mutation.mutate({
             id,
             name,
@@ -147,7 +151,7 @@ export const useUpdateDashboard = () => {
     const isLoading = mutation.isLoading;
 
     return {
-        updateDashboard : updateDash,
+        updateNotebook : update,
         isLoading
     }
 }
@@ -156,10 +160,10 @@ export const useCreateNote = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: createUpdateDashboardRequest,
+        mutationFn: createUpdateNotebookRequest,
         onSuccess: () => {
             toast.success("Successfully created note!");
-            queryClient.invalidateQueries('fetchCurrentDashboard');
+            queryClient.invalidateQueries('fetchCurrentNotebook');
         },
         onError: () => {
             toast.error("Something went wrong, please try again: ");
@@ -186,10 +190,10 @@ export const useUpdateNote = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: createUpdateDashboardRequest,
+        mutationFn: createUpdateNotebookRequest,
         onSuccess: () => {
             toast.success("Successfully updated note!");
-            queryClient.invalidateQueries('fetchCurrentDashboard');
+            queryClient.invalidateQueries('fetchCurrentNotebook');
         },
         onError: () => {
             toast.error("Something went wrong, please try again: ");
@@ -213,11 +217,11 @@ export const useUpdateNote = () => {
     }
 }
 
-export const useCreateDashboard = () => {
+export const useCreateNotebook = () => {
     const queryClient = useQueryClient();
 
-    const createCreateDashboardRequest = async (formData: dashboardForm) => {
-        const dashboard: Dashboard = {
+    const createCreateNotebookRequest = async (formData: NotebookForm) => {
+        const notebook: Notebook = {
             createdAt: new Date(),
             name: formData.name,
             description: formData.description,
@@ -225,12 +229,12 @@ export const useCreateDashboard = () => {
             notes: []
         }
 
-        const response = await fetch(API_BASE_URL + '/dashboard', {
+        const response = await fetch(API_BASE_URL + '/dashboard/notebook', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(dashboard)
+            body: JSON.stringify(notebook)
         })
 
         if(!response.ok){
@@ -243,34 +247,34 @@ export const useCreateDashboard = () => {
 
 
     const mutation = useMutation({
-        mutationFn: createCreateDashboardRequest,
+        mutationFn: createCreateNotebookRequest,
         onSuccess: () => {
-            toast.success("Successfully created dashboard!");
-            queryClient.invalidateQueries('fetchCurrentDashboard');
+            toast.success("Successfully created notebook!");
+            queryClient.invalidateQueries('fetchNotebooks');
         },
         onError: () => {
             toast.error("Something went wrong, please try again")
         }
     });
 
-    const createDash = (data : dashboardForm) => {
+    const create = (data : NotebookForm) => {
         mutation.mutate(data);
     }
 
     const isLoading = mutation.isLoading;
 
     return {
-        createDashboard : createDash,
+        createNotebook : create,
         isLoading
     }
 
 }
 
-export const useDeleteDashboard = () => {
+export const useDeleteNotebook = () => {
     const queryClient = useQueryClient();
 
-    const createDeleteDashboardRequest = async (id: string) => {
-        const response = await fetch(API_BASE_URL + "/dashboard/one/" + id, {
+    const createDeleteNotebookRequest = async (id: string) => {
+        const response = await fetch(API_BASE_URL + "/dashboard/notebook/" + id, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -285,10 +289,10 @@ export const useDeleteDashboard = () => {
     }
 
     const mutation = useMutation({
-        mutationFn: createDeleteDashboardRequest,
+        mutationFn: createDeleteNotebookRequest,
         onSuccess: () => {
-            toast.success("Successfully deleted dashboard!");
-            queryClient.invalidateQueries('fetchCurrentDashboard');
+            toast.success("Successfully deleted notebook!");
+            queryClient.invalidateQueries('fetchNotebooks');
         },
         onError: () => {
             toast.error("Something went wrong, please try again")
@@ -297,12 +301,12 @@ export const useDeleteDashboard = () => {
 
     const isLoading = mutation.isLoading;
 
-    const deleteDash = (id: string) => {
+    const deleteNtbook = (id: string) => {
         mutation.mutate(id);
     }
 
     return {
-        deleteDashboard: deleteDash,
+        deleteNotebook: deleteNtbook,
         isLoading
     }
 }
@@ -310,8 +314,8 @@ export const useDeleteDashboard = () => {
 export const useDeleteNote = () => {
     const queryClient = useQueryClient();
 
-    const createDeleteNoteRequest = async ({dashboardId, noteId}: {dashboardId: string, noteId: string}) => {
-        const response = await fetch(API_BASE_URL + "/dashboard/one/" + dashboardId + "/" + noteId, {
+    const createDeleteNoteRequest = async ({notebookId, noteId}: {notebookId: string, noteId: string}) => {
+        const response = await fetch(API_BASE_URL + "/dashboard/notebook/" + notebookId + "/" + noteId, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -329,7 +333,7 @@ export const useDeleteNote = () => {
         mutationFn: createDeleteNoteRequest,
         onSuccess: () => {
             toast.success("Successfully deleted note!");
-            queryClient.invalidateQueries('fetchCurrentDashboard');
+            queryClient.invalidateQueries('fetchCurrentNotebook');
         },
         onError: () => {
             toast.error("Something went wrong, please try again")
@@ -338,8 +342,8 @@ export const useDeleteNote = () => {
 
     const isLoading = mutation.isLoading;
 
-    const _deleteNote = ({dashboardId, noteId}: {dashboardId: string, noteId: string}) => {
-        mutation.mutate({dashboardId, noteId});
+    const _deleteNote = ({notebookId, noteId}: {notebookId: string, noteId: string}) => {
+        mutation.mutate({notebookId, noteId});
     }
 
     return {

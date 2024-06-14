@@ -1,8 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 
-let alreadyCreatedUser = false;
-
 export default async function Home() {
   return (
       <div className="w-full h-screen flex flex-col">

@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Task Manager
 
-## Getting Started
+Welcome to the Task Manager project! This project is a work in progress, aiming to provide a comprehensive solution for managing tasks, notes, and personal information. Currently, it includes functionalities for creating notebooks and notes, as well as user profiles. Future plans include implementing TODO lists, calendar tabs, insurance and car maintenance reminders, and more.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Current Features
+- **User Profiles**: Create and manage your user profile.
+- **Notebooks**: Create multiple notebooks to organize your notes.
+- **Notes**: Add, view, and manage notes within your notebooks.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Planned Features
+- **TODO Lists**: Create and manage your task lists.
+- **Calendar Tabs**: Plan your schedule with integrated calendar views.
+- **Insurance and Car Maintenance**: Set reminders for insurance renewals and car maintenance checks.
 
-## Learn More
+## Installation
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/your-username/task-manager.git
+    cd task-manager
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
+   
+3. Create and configure your Auth0  Regular Web Application and MongoDB
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+4. Set up the environment variables. Create a `.env.local` file in the root directory and add the following:
+    ```env
+    MONGO_URI=your_mongodb_connection_string
+   
+    PORT=your_preferred_port
+   
+    AUTH0_SECRET=your_auth0_secret
+    AUTH0_BASE_URL=your_app_base_url (dev http://localhost:{PORT})
+    AUTH0_ISSUER_BASE_URL=your_auth0_issuer_base_url
+    AUTH0_CLIENT_ID=your_auth0_client_id
+    AUTH0_CLIENT_SECRET=your_auth0_client_secret
+   
+    NEXT_PUBLIC_API_BASE_URL=your_api_base_url (dev: http://localhost:${PORT}/api/db)
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. Start the application:
+    ```sh
+    npm start
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Usage
+
+1. **User Profiles**: Register a new user or log in with your existing credentials.
+2. **Notebooks**: Create a new notebook by navigating to the "Notebooks" section and clicking "Add Notebook".
+3. **Notes**: Within a notebook, click "Add Note" to create a new note.
+
+## Roadmap
+
+- **Phase 1**: Complete current functionalities (user profiles, notebooks, notes).
+- **Phase 2**: Implement TODO lists.
+- **Phase 3**: Add calendar tab for scheduling.
+- **Phase 4**: Integrate reminders for insurance and car maintenance.
+
+## Contributing
+
+Contributions ale welcome to make this project better! Please follow these steps to contribute:
+
+1. Fork the repository.
+2. Create your feature branch:
+    ```sh
+    git checkout -b feature/YourFeature
+    ```
+3. Commit your changes:
+    ```sh
+    git commit -m 'Add some feature'
+    ```
+4. Push to the branch:
+    ```sh
+    git push origin feature/YourFeature
+    ```
+5. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any questions or suggestions, feel free to reach out to:
+- **Email**: noxikoxi@gmail.com
+- **GitHub**: [noxikoxi](https://github.com/noxikoxi)

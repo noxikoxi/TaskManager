@@ -1,5 +1,4 @@
 import hero from "../../public/hero.jpg"
-import {AspectRatio} from "@/components/ui/aspect-ratio";
 import Image from "next/image";
 
 const Hero = () => {

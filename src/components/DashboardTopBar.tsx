@@ -2,16 +2,17 @@
 
 import {Separator} from "@/components/ui/separator";
 import Notifications from "@/components/Notifications";
-import CreateDashboardCard from "@/components/CreateDashboardCard";
+import CreateNotebookCard from "@/components/CreateNotebookCard";
 import {useState} from "react";
 import { Button } from "./ui/button";
 import BreadCrumb from "@/components/BreadCrumb";
 import CreateNoteCard from "@/components/CreateNoteCard";
-import {dashboardForm} from "@/lib/types";
+import {NotebookForm} from "@/lib/types";
+import notebook from "@/lib/models/notebook";
 
 type Props = {
     options?: {
-        Dashboards: boolean,
+        Notebooks: boolean,
         Notes: boolean,
     }
     // List of links
@@ -20,10 +21,10 @@ type Props = {
     // List of visible texts
     textList: string[]
 
-    dashboard?: dashboardForm & {id: string}
+    notebook?: NotebookForm & {id: string}
 }
 
-const DashboardTopBar = ({options, linkList, textList, dashboard} : Props) => {
+const DashboardTopBar = ({options, linkList, textList, notebook} : Props) => {
     const [showCreateCard, setShowCreateCard] = useState<boolean>(false );
     const [showUpdateCard, setShowUpdateCard] = useState<boolean>(false );
 
@@ -41,7 +42,7 @@ const DashboardTopBar = ({options, linkList, textList, dashboard} : Props) => {
                                 variant="secondary"
                                 onClick={() =>setShowCreateCard(true)}
                             >
-                                {options?.Dashboards ? "Create Dashboard" : "Create Note"}
+                                {options?.Notebooks ? "Create Notebook" : "Create Note"}
                             </Button>
 
                             {options?.Notes && (
@@ -50,7 +51,7 @@ const DashboardTopBar = ({options, linkList, textList, dashboard} : Props) => {
                                     variant="secondary"
                                     onClick={() => setShowUpdateCard(true)}
                                 >
-                                    Edit Current Dashboard
+                                    Edit Current Notebook
                                 </Button>
                             )}
                         </div>
@@ -61,9 +62,9 @@ const DashboardTopBar = ({options, linkList, textList, dashboard} : Props) => {
                 </div>
             </div>
             <Separator className="bg-foreground hidden md:block"/>
-            {options?.Dashboards && showCreateCard && <CreateDashboardCard showCard={setShowCreateCard}/>}
-            {options?.Notes && dashboard && showUpdateCard && <CreateDashboardCard
-                showCard={setShowUpdateCard} id={dashboard.id} name={dashboard.name} description={dashboard.description}
+            {options?.Notebooks && showCreateCard && <CreateNotebookCard showCard={setShowCreateCard}/>}
+            {options?.Notes && notebook && showUpdateCard && <CreateNotebookCard
+                showCard={setShowUpdateCard} id={notebook.id} name={notebook.name} description={notebook.description}
             />}
             {options?.Notes && showCreateCard && <CreateNoteCard showCard={setShowCreateCard}/>}
         </div>

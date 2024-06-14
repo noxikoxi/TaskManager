@@ -1,13 +1,12 @@
 'use client'
 
 import {Separator} from "@/components/ui/separator";
-import {LayoutDashboard, ListTodo, UserRound, Car, CalendarDays, CircleUserRound} from "lucide-react";
+import {ListTodo, UserRound, Car, CalendarDays, CircleUserRound, Notebook} from "lucide-react";
 import NavLink from "@/components/NavLink";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
 import {useGetCurrentUser} from "@/lib/client/UserHooks";
-import {useUser} from "@auth0/nextjs-auth0/client";
 
 const SideNav = () => {
     const {user, isLoading} = useGetCurrentUser();
@@ -33,11 +32,11 @@ const SideNav = () => {
                 </div>
                 <Separator className="my-5 bg-black"/>
                 <div className="grid grid-cols-1 gap-5">
-                    <NavLink linkText="Profile" linkUrl="/dashboards/profile" Svg={UserRound}/>
-                    <NavLink linkText="Dashboards" linkUrl="/dashboards" Svg={LayoutDashboard}/>
-                    <NavLink linkText="Todos" linkUrl="/dashboards/todo" Svg={ListTodo}/>
-                    <NavLink linkText="Inspection & Insurance" linkUrl="/dashboards/insurance" Svg={Car}/>
-                    <NavLink linkText="Calendar" linkUrl="/dashboards/calendar" Svg={CalendarDays}/>
+                    <NavLink linkText="Profile" linkUrl="/dashboard/profile" Svg={UserRound}/>
+                    <NavLink linkText="Notebooks" linkUrl="/dashboard/notebooks" Svg={Notebook}/>
+                    <NavLink linkText="Todos" linkUrl="/dashboard/todo" Svg={ListTodo}/>
+                    <NavLink linkText="Inspection & Insurance" linkUrl="/dashboard/insurance" Svg={Car}/>
+                    <NavLink linkText="Calendar" linkUrl="/dashboard/calendar" Svg={CalendarDays}/>
                 </div>
             </div>
             <div className="flex flex-col items-center mb-10">

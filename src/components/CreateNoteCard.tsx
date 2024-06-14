@@ -12,7 +12,7 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {Textarea} from "@/components/ui/textarea";
-import {useCreateNote, useDeleteNote, useUpdateNote} from "@/lib/client/DashboardHooks";
+import {useCreateNote, useDeleteNote, useUpdateNote} from "@/lib/client/NotebookHooks";
 
 type Props = {
     showCard: Dispatch<SetStateAction<boolean>>,
@@ -65,7 +65,7 @@ const CreateNoteCard = ({showCard, noteTitle, noteId, noteContent} : Props) => {
 
     const handleDeleteNote = () => {
         if(noteId) {
-            deleteNote({dashboardId: id, noteId});
+            deleteNote({notebookId: id, noteId});
         }
         showCard(false);
     }

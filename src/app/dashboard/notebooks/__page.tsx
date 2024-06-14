@@ -1,20 +1,19 @@
 'use client'
 
-import DashboardPreview from "@/components/DashboardPreview";
+import NotebookPreview from "@/components/NotebookPreview";
 import DashboardTopBar from "@/components/DashboardTopBar";
-import {useGetDashboards} from "@/lib/client/DashboardHooks";
+import {useGetNotebooks} from "@/lib/client/NotebookHooks";
 import {useContext, useEffect} from "react";
 import {SideNavContext} from "@/lib/Context/SideNavContext";
-import { withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 
 
 export default function Home() {
 
-    const {dashboards, isLoading} = useGetDashboards();
+    const {notebooks, isLoading} = useGetNotebooks();
     const {changeActive} = useContext(SideNavContext);
 
     useEffect(() => {
-        changeActive("Dashboards")
+        changeActive("Notebooks")
     }, []);
 
     if(isLoading){
@@ -25,29 +24,29 @@ export default function Home() {
         <div className="relative inset-0 h-full w-full bg-background">
             <DashboardTopBar
                 options={{
-                    Dashboards: true,
+                    Notebooks: true,
                     Notes: false
                 }}
-                linkList={["/dashboards"]}
-                textList={["Dashboards"]}
+                linkList={["/dashboard/notebooks"]}
+                textList={["Notebooks"]}
             />
-            {!dashboards || dashboards.length == 0 ? (
+            {!notebooks || notebooks.length == 0 ? (
                 <div className="flex flex-1 flex-row justify-center">
                         <div className="flex flex-col items-center gap-5 p-5">
-                        <p className="font-semibold text-black text-xl"> You do not have any dashboards yet</p>
+                        <p className="font-semibold text-black text-xl"> You do not have any notebooks yet</p>
                         <p className="font-semibold text-black text-xl"> Start creating</p>
                         </div>
                 </div>
             ) : (
                 <div className="p-10 grid gap-5 grid-cols-[repeat(auto-fill,minmax(250px,_1fr))]">
-                    {dashboards.map((dashboard) => (
-                        <DashboardPreview
-                            id={dashboard._id}
-                            key={dashboard._id}
-                            createdAt={dashboard.createdAt}
-                            notesNumber={dashboard.notes.length}
-                            title={dashboard.name}
-                            description={dashboard.description}
+                    {notebooks.map((notebook) => (
+                        <NotebookPreview
+                            id={notebook._id}
+                            key={notebook._id}
+                            createdAt={notebook.createdAt}
+                            notesNumber={notebook.notes.length}
+                            title={notebook.name}
+                            description={notebook.description}
                         />
                     ))
                     }

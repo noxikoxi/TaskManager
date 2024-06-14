@@ -4,7 +4,7 @@ export default async function Home() {
 
     if(await createUser())
     {
-        redirect("/dashboards");
+        redirect("/dashboard/notebooks");
     }else{
         redirect("/api/auth/logout");
     }
