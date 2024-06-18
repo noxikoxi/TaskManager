@@ -16,6 +16,7 @@ export const POST = async (req : NextRequest) => {
         const userId = session.user.sub;
         const data = await req.json();
         data.userId = userId;
+        data.notes = []
         const name = data.name;
 
         const existingNotebook = await Notebook.findOne({name, userId});

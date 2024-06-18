@@ -52,7 +52,6 @@ export const useGetNotebooks = () => {
             },
         });
 
-        console.log(response);
 
         if(!response.ok){
             throw new Error();
@@ -221,12 +220,9 @@ export const useCreateNotebook = () => {
     const queryClient = useQueryClient();
 
     const createCreateNotebookRequest = async (formData: NotebookForm) => {
-        const notebook: Notebook = {
-            createdAt: new Date(),
+        const notebook: NotebookForm = {
             name: formData.name,
             description: formData.description,
-            userId: "", // will be fetched at server api
-            notes: []
         }
 
         const response = await fetch(API_BASE_URL + '/dashboard/notebook', {
