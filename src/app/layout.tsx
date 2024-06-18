@@ -9,6 +9,7 @@ import {Toaster} from "@/components/ui/sonner";
 import {QueryClient} from "react-query";
 import {getTestReqInfo} from "next/dist/experimental/testmode/context";
 import {AppProvider} from "@/lib/Context/SideNavContext";
+import {ThemeProvider} from "@/lib/Providers/ThemeProvider";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -32,10 +33,17 @@ export default function RootLayout({
                     <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
                         <ReactQueryProvider>
                             <AppProvider>
-                                <main>
-                                    {children}
-                                </main>
-                                <Toaster/>
+                                <ThemeProvider
+                                    attribute="class"
+                                    defaultTheme="light"
+                                    enableSystem
+                                    disableTransitionOnChange
+                                >
+                                    <main>
+                                        {children}
+                                    </main>
+                                    <Toaster/>
+                                </ThemeProvider>
                             </AppProvider>
                         </ReactQueryProvider>
                     </body>

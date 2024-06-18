@@ -7,6 +7,7 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
 import {useGetCurrentUser} from "@/lib/client/UserHooks";
+import {ModeToggle} from "@/components/ModeToggle";
 
 const SideNav = () => {
     const {user, isLoading} = useGetCurrentUser();
@@ -26,11 +27,11 @@ const SideNav = () => {
                 <div className="my-4 flex flex-row items-center justify-center flex-1 gap-2">
                     <Avatar>
                         {user?.picture && <AvatarImage src={user?.picture}/>}
-                        <AvatarFallback>{fallBack()}</AvatarFallback>
+                        <AvatarFallback className="bg-accent">{fallBack()}</AvatarFallback>
                     </Avatar>
                     <span className="font-semibold text-xl">{user?.username}</span>
                 </div>
-                <Separator className="my-5 bg-black"/>
+                <Separator className="my-5"/>
                 <div className="grid grid-cols-1 gap-5">
                     <NavLink linkText="Profile" linkUrl="/dashboard/profile" Svg={UserRound}/>
                     <NavLink linkText="Notebooks" linkUrl="/dashboard/notebooks" Svg={Notebook}/>
@@ -39,7 +40,8 @@ const SideNav = () => {
                     <NavLink linkText="Calendar" linkUrl="/dashboard/calendar" Svg={CalendarDays}/>
                 </div>
             </div>
-            <div className="flex flex-col items-center mb-10">
+            <div className="flex flex-col items-center mb-10 gap-4">
+                <ModeToggle/>
                 <Button variant="ghost" className="w-3/4 bg-accent hover:bg-accent/80 rounded-full font-semibold " onClick={() => router.push("/api/auth/logout")}>
                     Log Out
                 </Button>

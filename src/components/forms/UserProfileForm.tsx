@@ -92,7 +92,7 @@ const UserProfileForm = ({currentUser, onSave, isLoading} : Props) => {
                             <FormItem>
                                 <FormLabel>Username</FormLabel>
                                 <FormControl>
-                                    <Input {...field} className="bg-white"/>
+                                    <Input {...field}/>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -105,7 +105,7 @@ const UserProfileForm = ({currentUser, onSave, isLoading} : Props) => {
                             <FormItem>
                                 <FormLabel>Company</FormLabel>
                                 <FormControl>
-                                    <Input {...field} className="bg-white"/>
+                                    <Input {...field}/>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -120,7 +120,7 @@ const UserProfileForm = ({currentUser, onSave, isLoading} : Props) => {
                             <FormItem>
                                 <FormLabel>First Name</FormLabel>
                                 <FormControl>
-                                    <Input {...field} className="bg-white"/>
+                                    <Input {...field}/>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -133,7 +133,7 @@ const UserProfileForm = ({currentUser, onSave, isLoading} : Props) => {
                             <FormItem>
                                 <FormLabel>Last Name</FormLabel>
                                 <FormControl>
-                                    <Input {...field} className="bg-white"/>
+                                    <Input {...field}/>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -148,7 +148,7 @@ const UserProfileForm = ({currentUser, onSave, isLoading} : Props) => {
                             <FormItem>
                                 <FormLabel>City</FormLabel>
                                 <FormControl>
-                                    <Input {...field} className="bg-white"/>
+                                    <Input {...field}/>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -161,7 +161,7 @@ const UserProfileForm = ({currentUser, onSave, isLoading} : Props) => {
                             <FormItem>
                                 <FormLabel>Country</FormLabel>
                                 <FormControl>
-                                    <Input {...field} className="bg-white"/>
+                                    <Input {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -178,7 +178,7 @@ const UserProfileForm = ({currentUser, onSave, isLoading} : Props) => {
                                 <Textarea
                                     placeholder="Say something about yourself"
                                     {...field}
-                                    className="w-full md:h-[300px] bg-white resize-none"
+                                    className="w-full md:h-[300px] resize-none"
 
                                 />
                             </FormControl>

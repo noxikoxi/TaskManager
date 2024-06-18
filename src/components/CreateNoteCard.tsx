@@ -129,7 +129,7 @@ const CreateNoteCard = ({showCard, noteTitle, noteId, noteContent} : Props) => {
                                 />
                             </div>
                             <div className="flex flex-row gap-5 items-end">
-                                <Button type="submit" variant="default" className="font-semibold text-black mt-5">
+                                <Button type="submit" variant="secondary" className="font-semibold text-black mt-5">
                                     {noteId ? "Update" : "Create"}
                                 </Button>
                                 {noteId &&

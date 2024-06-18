@@ -61,7 +61,7 @@ const DashboardTopBar = ({options, linkList, textList, notebook} : Props) => {
                     <Notifications/>
                 </div>
             </div>
-            <Separator className="bg-foreground hidden md:block"/>
+            <Separator className="bg-border hidden md:block"/>
             {options?.Notebooks && showCreateCard && <CreateNotebookCard showCard={setShowCreateCard}/>}
             {options?.Notes && notebook && showUpdateCard && <CreateNotebookCard
                 showCard={setShowUpdateCard} id={notebook.id} name={notebook.name} description={notebook.description}

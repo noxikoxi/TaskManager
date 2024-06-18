@@ -89,7 +89,7 @@ const CreateNotebookCard  = ({showCard, id, name, description} : Props) => {
                                     </FormItem>
                                 )}
                             />
-                            <Button type="submit" variant="default" className="font-semibold text-black mt-5">
+                            <Button type="submit" variant="secondary" className="font-semibold text-black mt-5">
                                 {id ? "Update" : "Create"}
                             </Button>
                         </form>

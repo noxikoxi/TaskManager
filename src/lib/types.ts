@@ -19,7 +19,7 @@ export type Note = {
 }
 
 export type Notebook = {
-    _id?: string,
+    _id: string,
     name: string,
     description?: string,
     userId: string,
@@ -45,4 +45,18 @@ export type UpdateUserRequest = {
     aboutMe :string;
     firstName : string;
     lastName : string;
+}
+
+export type TodoItem = {
+    _id: string,
+    content: string,
+    isDone: boolean
+}
+
+export type Todo = {
+    _id: string,
+    title: string,
+    description: string,
+    createdAt: Date,
+    items: [] | TodoItem[],
 }

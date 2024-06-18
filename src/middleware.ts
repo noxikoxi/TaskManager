@@ -7,5 +7,5 @@ const middleware = withMiddlewareAuthRequired();
 export default middleware;
 
 export const config = {
-  matcher: ['/api/db/dashboard/:path*', '/api/db/user/:path*', '/dashboards/:path*']
+  matcher: ['/api/db/dashboard/:path*', '/api/db/user/:path*', '/dashboard/:path*']
 };

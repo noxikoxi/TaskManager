@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {useUser} from "@auth0/nextjs-auth0/client";
 import Link from "next/link";
+import {ModeToggle} from "@/components/ModeToggle";
 
 const UserMenu = () => {
     const {user} = useUser();
@@ -33,10 +34,13 @@ const UserMenu = () => {
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                    <Link href="/api/auth/logout" className="text-black hover:text-orange-200 font-bold text-xl">
+                    <Link href="/api/auth/logout" className="font-bold text-xl">
                         Log Out
                     </Link>
                 </DropdownMenuItem>
+                <div className="flex flex-row justify-center">
+                    <ModeToggle/>
+                </div>
             </DropdownMenuContent>
         </DropdownMenu>
     )

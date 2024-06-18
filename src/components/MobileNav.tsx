@@ -8,6 +8,7 @@ import {Button} from "@/components/ui/button";
 import NavLink from "@/components/NavLink";
 import {useGetCurrentUser} from "@/lib/client/UserHooks";
 import Notifications from "@/components/Notifications";
+import {ModeToggle} from "@/components/ModeToggle";
 
 const MobileNav = () => {
     const { user, error, isLoading } = useGetCurrentUser();
@@ -15,7 +16,7 @@ const MobileNav = () => {
     return (
         <Sheet>
             <SheetTrigger>
-                <SquareMenu className="text-secondary-foreground" strokeWidth={2.0} size={45}/>
+                <SquareMenu className="text-secondary" strokeWidth={2.0} size={45}/>
             </SheetTrigger>
             <SheetContent className="bg-secondary border-accent">
                 <SheetHeader>
@@ -41,17 +42,21 @@ const MobileNav = () => {
                         <Notifications/>
                     </div>
 
-                    {user ? (
-                        <Button variant="ghost" className="my-10 flex-1 flex-row text-secondary-foreground bg-accent hover:bg-accent/90">
-                        <Link href="/api/auth/logout">Log Out</Link>
+                    <div className="my-10 flex flex-col items-center gap-3 ">
+                        <ModeToggle/>
 
-                    </Button>
-                    ) : (
-                    <Button className="flex-1 flex-row font-bold text-white hover:text-orange-300">
-                        <Link href="/api/auth/login" className="font-semibold">Log In</Link>
+                        {user ? (
+                            <Button variant="ghost" className="w-full bg-accent hover:bg-accent/90">
+                            <Link href="/api/auth/logout">Log Out</Link>
 
-                    </Button>
-                    )}
+                        </Button>
+                        ) : (
+                        <Button className="w-full font-bold text-white hover:text-orange-300">
+                            <Link href="/api/auth/login" className="font-semibold">Log In</Link>
+
+                        </Button>
+                        )}
+                    </div>
                 </SheetDescription>
             </SheetContent>
         </Sheet>

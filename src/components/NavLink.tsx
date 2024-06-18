@@ -17,7 +17,7 @@ const NavLink = ({linkText, linkUrl, Svg} : Props) => {
 
     return (
         <Link
-            className={clsx("flex flex-row items-center justify-start ps-10 gap-3 hover:text-background text-xl", {"text-background" : state.activeLink === linkText})}
+            className={clsx("flex flex-row items-center justify-start ps-10 gap-3 hover:text-accent text-xl", {"text-accent" : state.activeLink === linkText})}
             href={linkUrl}
         >
             <Svg />
