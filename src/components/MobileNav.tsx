@@ -32,11 +32,11 @@ const MobileNav = () => {
                     <Separator className="bg-accent"/>
                 </SheetHeader>
                 <SheetDescription className="flex flex-col gap-3 pt-3 font-semibold text-black text-xl">
-                    <NavLink linkText="Profile" linkUrl="/dashboards/profile" Svg={UserRound}/>
-                    <NavLink linkText="Dashboards" linkUrl="/dashboards" Svg={LayoutDashboard}/>
-                    <NavLink linkText="Todos" linkUrl="/dashboards/todo" Svg={ListTodo}/>
-                    <NavLink linkText="Inspection & Insurance" linkUrl="/dashboards/insurance" Svg={Car}/>
-                    <NavLink linkText="Calendar" linkUrl="/dashboards/calendar" Svg={CalendarDays}/>
+                    <NavLink linkText="Profile" linkUrl="/dashboard/profile" Svg={UserRound}/>
+                    <NavLink linkText="Notebooks" linkUrl="/dashboard/notebooks" Svg={LayoutDashboard}/>
+                    <NavLink linkText="Todos" linkUrl="/dashboard/todo" Svg={ListTodo}/>
+                    <NavLink linkText="Inspection & Insurance" linkUrl="/dashboard/insurance" Svg={Car}/>
+                    <NavLink linkText="Calendar" linkUrl="/dashboard/calendar" Svg={CalendarDays}/>
                     <div className="ps-10">
                         <Notifications/>
                     </div>

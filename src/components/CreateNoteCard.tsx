@@ -79,8 +79,8 @@ const CreateNoteCard = ({showCard, noteTitle, noteId, noteContent} : Props) => {
     }
 
     return (
-        <div className="fixed bg-black w-full h-full top-0 left-0 bg-opacity-40 z-20">
-            <Card className="fixed top-[15%] lg:top-1/3 lg:left-1/3 w-full lg:w-[600px] xl:w-[800px]">
+        <div className="fixed bg-black w-full h-full top-0 left-0 bg-opacity-40 z-20 ">
+            <Card className="lg:fixed relative h-full lg:h-auto lg:top-[10%] lg:left-[20%] w-full lg:w-[800px] xl:w-[1000px]">
                 <X  strokeWidth={2} size={32} className="cursor-pointer text-destructive absolute top-0 right-1" onClick={() => showCard(false)} />
                 <CardHeader>
                     <CardTitle>{noteId ? "Update Note" : "Create Note"}</CardTitle>
@@ -91,45 +91,42 @@ const CreateNoteCard = ({showCard, noteTitle, noteId, noteContent} : Props) => {
                     <Form {...form}>
                         <form
                             onSubmit={form.handleSubmit(onSubmit)}
+                            className="h-full flex flex-col justify-between"
                         >
-                            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-                                <div>
-                                    <FormField
-                                        control = {form.control}
-                                        name="title"
-                                        render = {({field}) => (
-                                            <FormItem>
-                                                <FormLabel>Title</FormLabel>
-                                                <FormControl>
-                                                    <Input
-                                                        {...field}
-                                                        placeholder="Note title"
-                                                    />
-                                                </FormControl>
-                                                <FormMessage/>
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
-                                <div className="col-span-2">
-                                    <FormField
-                                        control = {form.control}
-                                        name="content"
-                                        render = {({field}) => (
-                                            <FormItem>
-                                                <FormLabel>Content</FormLabel>
-                                                <FormControl>
-                                                    <Textarea
-                                                        placeholder="Type your note here"
-                                                        {...field}
-                                                        className="w-full md:h-[300px]"
-                                                    />
-                                                </FormControl>
-                                                <FormMessage/>
-                                            </FormItem>
-                                        )}
-                                    />
-                                </div>
+                            <div className="h-full flex flex-col md:grid md:gap-5 md:grid-cols-3">
+                                <FormField
+                                    control = {form.control}
+                                    name="title"
+                                    render = {({field}) => (
+                                        <FormItem>
+                                            <FormLabel>Title</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    {...field}
+                                                    placeholder="Note title"
+                                                />
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control = {form.control}
+                                    name="content"
+                                    render = {({field}) => (
+                                        <FormItem className="h-full flex-1 md:col-span-2">
+                                            <FormLabel>Content</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                    placeholder="Type your note here"
+                                                    {...field}
+                                                    className="w-full min-h-[300px] h-full md:h-[400px]"
+                                                />
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}
+                                />
                             </div>
                             <div className="flex flex-row gap-5 items-end">
                                 <Button type="submit" variant="default" className="font-semibold text-black mt-5">

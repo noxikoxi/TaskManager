@@ -21,7 +21,7 @@ const SideNav = () => {
     }
 
     return (
-        <nav className="sticky w-[250px] h-full bg-primary flex flex-col justify-between">
+        <nav className="w-full h-full bg-primary flex flex-col justify-between">
             <div>
                 <div className="my-4 flex flex-row items-center justify-center flex-1 gap-2">
                     <Avatar>

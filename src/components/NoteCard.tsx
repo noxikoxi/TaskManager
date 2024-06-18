@@ -31,15 +31,14 @@ const NoteCard = ({title, content, createdAt, selectNote, id, showEditing} : Pro
             className="cursor-pointer hover:outline hover:outline-primary shadow max-h-[350px] overflow-auto relative"
             onClick={() => handleSelect()}
         >
-
             <div className="sticky top-0 z-10 bg-secondary">
                 <CardHeader>
                     <CardTitle>{title}</CardTitle>
                 </CardHeader>
                 <Separator/>
             </div>
-            <div className="flex flex-col justify-between">
-                <CardContent  className="text-sm w-full">
+            <div className="pt-2 flex flex-col justify-between ">
+                <CardContent  className="text-sm w-full ">
                     <pre className="whitespace-pre-wrap">
                         {content}
                     </pre>

@@ -50,8 +50,6 @@ export const PUT = async (req: NextRequest) => {
             (user as any)[key] = (data as any)[key];
         }
 
-        console.log(user);
-
         await user.save()
 
         return new Response(JSON.stringify(user), {status: 200});

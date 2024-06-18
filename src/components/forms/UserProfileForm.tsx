@@ -23,7 +23,7 @@ const formSchema = z.object({
     company: z.string()
         .max(60, "Company name exceed 60 characters"),
     aboutMe: z.string()
-        .max(300, "About me cannot exceed 300 characters"),
+        .max(600, "About me cannot exceed 600 characters"),
     city: z.string()
         .min(1, "City must have at least 1 character")
         .max(60, "City cannot exceed 60 characters"),
@@ -71,7 +71,7 @@ const UserProfileForm = ({currentUser, onSave, isLoading} : Props) => {
                         View and change your profile information here
                     </FormDescription>
                 </div>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="flex flex-col md:grid md:grid-cols-3 gap-4">
                     <FormField
                         control={form.control}
                         name="email"
@@ -112,7 +112,7 @@ const UserProfileForm = ({currentUser, onSave, isLoading} : Props) => {
                         )}
                     />
                 </div>
-                <div className="grid grid-cols-2 gap-8">
+                <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-8">
                     <FormField
                         control={form.control}
                         name="firstName"
@@ -140,7 +140,7 @@ const UserProfileForm = ({currentUser, onSave, isLoading} : Props) => {
                         )}
                     />
                 </div>
-                <div className="grid grid-cols-2 gap-8">
+                <div className="flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-8">
                     <FormField
                         control={form.control}
                         name="city"

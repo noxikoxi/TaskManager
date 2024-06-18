@@ -29,7 +29,7 @@ export default function Home() {
     }
 
     return (
-        <div className="relative inset-0 h-full w-full bg-white bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
+        <div className="relative h-full w-full bg-white bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
             <DashboardTopBar
                 options={{
                     Notebooks: false,
@@ -51,7 +51,7 @@ export default function Home() {
                     </div>
                 </div>
             ) : (
-                <div className="p-10 grid gap-5 grid-cols-[repeat(auto-fill,minmax(350px,_1fr))]">
+                <div className="flex flex-col gap-5 pt-5 md:p-10 md:grid md:gap-5 md:grid-cols-[repeat(auto-fill,minmax(350px,_1fr))]">
                     {notebook.notes.map((note : Note) => (
                         <NoteCard
                             key={note._id}

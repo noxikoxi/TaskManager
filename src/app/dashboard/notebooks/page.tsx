@@ -38,7 +38,7 @@ export default function Home() {
                     </div>
                 </div>
             ) : (
-                <div className="p-10 grid gap-5 grid-cols-[repeat(auto-fill,minmax(250px,_1fr))]">
+                <div className="flex flex-col justify-center gap-5 pt-5 md:p-10 md:grid md:gap-5 md:grid-cols-[repeat(auto-fill,minmax(250px,_1fr))]">
                     {notebooks.map((notebook) => (
                         <NotebookPreview
                             id={notebook._id}
