@@ -25,7 +25,8 @@ export default function Home() {
             <DashboardTopBar
                 options={{
                     Notebooks: true,
-                    Notes: false
+                    Notes: false,
+                    Todo: false
                 }}
                 linkList={["/dashboard/notebooks"]}
                 textList={["Notebooks"]}
@@ -33,12 +34,12 @@ export default function Home() {
             {!notebooks || notebooks.length == 0 ? (
                 <div className="flex flex-1 flex-row justify-center">
                     <div className="flex flex-col items-center gap-5 p-5">
-                        <p className="font-semibold text-black text-xl"> You do not have any notebooks yet</p>
-                        <p className="font-semibold text-black text-xl"> Start creating</p>
+                        <p className="font-semibold text-xl"> You do not have any notebooks yet</p>
+                        <p className="font-semibold text-xl"> Start creating</p>
                     </div>
                 </div>
             ) : (
-                <div className="flex flex-col justify-center gap-5 pt-5 md:p-10 md:grid md:gap-5 md:grid-cols-[repeat(auto-fill,minmax(250px,_1fr))]">
+                <div className="flex flex-col justify-center gap-8 pt-5 md:p-10 md:grid md:gap-5 md:grid-cols-[repeat(auto-fill,minmax(250px,_1fr))]">
                     {notebooks.map((notebook) => (
                         <NotebookPreview
                             id={notebook._id}

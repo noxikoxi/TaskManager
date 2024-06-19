@@ -6,8 +6,9 @@ import { Note} from "@/lib/types";
 import NoteCard from "@/components/NoteCard";
 import DashboardTopBar from "@/components/DashboardTopBar";
 import {useGetNotebook} from "@/lib/client/NotebookHooks";
-import CreateNoteCard from "@/components/CreateNoteCard";
 import {useState} from "react";
+import ItemCard from "@/components/ItemCard";
+import NoteForm from "@/components/forms/NoteForm";
 
 export default function Home() {
     const pathname = usePathname();
@@ -33,7 +34,8 @@ export default function Home() {
             <DashboardTopBar
                 options={{
                     Notebooks: false,
-                    Notes: true
+                    Notes: true,
+                    Todo: false
                 }}
                 linkList={["/dashboard/notebooks", ""]}
                 textList={["Notebooks", notebook.name]}
@@ -46,12 +48,12 @@ export default function Home() {
             {notebook.notes.length == 0 && !isLoading ? (
                 <div className="flex flex-1 flex-row justify-center">
                     <div className="flex flex-col items-center gap-5 p-5">
-                        <p className="font-semibold text-black text-xl"> You do not have any notes yet</p>
-                        <p className="font-semibold text-black text-xl"> Start creating</p>
+                        <p className="font-semibold text-xl"> You do not have any notes yet</p>
+                        <p className="font-semibold text-xl"> Start creating</p>
                     </div>
                 </div>
             ) : (
-                <div className="flex flex-col gap-5 pt-5 md:p-10 md:grid md:gap-5 md:grid-cols-[repeat(auto-fill,minmax(350px,_1fr))]">
+                <div className="flex flex-col gap-10 pt-5 md:p-10 md:grid md:gap-5 md:grid-cols-[repeat(auto-fill,minmax(350px,_1fr))]">
                     {notebook.notes.map((note : Note) => (
                         <NoteCard
                             key={note._id}
@@ -65,12 +67,19 @@ export default function Home() {
                     ))}
                 </div>
             )}
-            {showUpdateCard && <CreateNoteCard
-                showCard={setShowUpdateCard}
-                noteId={selectedNote?._id}
-                noteTitle={selectedNote?.title}
-                noteContent={selectedNote?.content}
-            />}
+             {showUpdateCard && <ItemCard
+                    showCard={setShowUpdateCard}
+                    title="Edit your note"
+                    description="Feel free to change anything"
+                    size="lg"
+                >
+                <NoteForm showCard={setShowUpdateCard}
+                          noteId={selectedNote?._id}
+                          noteTitle={selectedNote?.title}
+                          noteContent={selectedNote?.content}
+                />
+
+                </ItemCard> }
         </div>
     )
 };

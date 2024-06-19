@@ -1,7 +1,11 @@
 import mongoose from 'mongoose';
 
 const todoSchema = new mongoose.Schema({
-    title: {
+    name: {
+        type: String,
+        required: true
+    },
+    userId: {
         type: String,
         required: true
     },
@@ -14,13 +18,29 @@ const todoSchema = new mongoose.Schema({
     },
     items: [
         {
-            content: {
-                type: String,
-                required: true
-            },
+            points: [
+                {
+                    content: {
+                        type: String,
+                        required: true
+                    },
+                    isDone: {
+                        type: Boolean,
+                        default: false
+                    },
+                    isImportant: {
+                        type: Boolean,
+                        default: false
+                    }
+                }
+            ],
             isDone: {
                 type: Boolean,
-                required: true
+                default: false
+            },
+            isImportant: {
+                type: Boolean,
+                default: false
             }
         }
     ]

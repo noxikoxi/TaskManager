@@ -31,3 +31,24 @@ export const createUser = async () => {
     }
 }
 
+export const getTodos = async() => {
+    const response = await fetch(API_BASE_URL + '/db/todos', {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+
+    if(!response.ok){
+        return false;
+    }
+
+    console.log(response);
+
+    if(response.status != 200){
+        return []
+    }else{
+        return await response.json();
+    }
+}
+

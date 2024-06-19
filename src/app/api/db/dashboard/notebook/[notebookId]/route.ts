@@ -1,6 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
 import {Notebook as NotebookType, Note} from "@/lib/types";
-import Dashboard from "@/lib/models/notebook";
 import {NextRequest} from "next/server";
 import Notebook from "@/lib/models/notebook";
 
@@ -20,7 +19,7 @@ export const GET = async(req: NextRequest, {params} : {params : {notebookId: str
             return new Response("Invalid id", {status: 404});
         }
     }catch (error){
-        return new Response(`Failed to fetch Dashboard: ${error}`, {status: 400})
+        return new Response(`Failed to fetch Notebooks: ${error}`, {status: 400})
     }
 };
 

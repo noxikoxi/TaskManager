@@ -1,17 +1,23 @@
-'use client'
+import DashboardTopBar from "@/components/DashboardTopBar";
+import Content from "@/app/dashboard/todo/content";
+import {getTodos} from "@/lib/actions";
 
-import {useContext, useEffect} from "react";
-import {SideNavContext} from "@/lib/Context/SideNavContext";
+export default async function Home() {
 
-export default function Home() {
-
-    const {changeActive} = useContext(SideNavContext);
-
-    useEffect(() => {
-        changeActive("Todos")
-    }, []);
+    const todos = await getTodos();
 
     return (
-        <span> In building...</span>
+        <div>
+            <DashboardTopBar
+                linkList={["/dashboard/todo"]}
+                textList={["Todos"]}
+                options={{
+                    Notebooks: false,
+                    Notes: false,
+                    Todo: true
+                }}
+            ></DashboardTopBar>
+            <Content todos={todos}/>
+        </div>
     )
 };
