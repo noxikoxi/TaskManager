@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import MainNav from "@/components/MainNav";
-import MobileNav from "@/components/MobileNav";
 
 
 const Header = () => {

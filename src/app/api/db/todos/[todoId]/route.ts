@@ -29,7 +29,6 @@ export const PUT = async (req: NextRequest, {params} : {params : {todoId: string
         const data = await req.json();
         const id = params.todoId;
 
-
         if(Object.keys(data).length == 0){
             return new Response("No data was sent", {status: 400});
         }
@@ -40,9 +39,19 @@ export const PUT = async (req: NextRequest, {params} : {params : {todoId: string
             return new Response("Todo not found", {status: 404});
         }
 
-        existingTodo.title = data.title
-        existingTodo.description = data.description
-        
+        if(data.name && data.description) { // Update todo
+            existingTodo.name = data.name
+            existingTodo.description = data.description
+        }
+
+        if(data.content){ // add todoItem
+            existingTodo.items.push({
+                points: [
+                ],
+                content: data.content,
+            });
+        }
+
         await existingTodo.save();
         return new Response(JSON.stringify(existingTodo), {status: 200})
 
@@ -64,6 +73,6 @@ export const DELETE = async (req: NextRequest, {params} : {params : {todoId: str
             return new Response("Todo " + id + " not found", {status: 404} )
         }
     }catch(error){
-        return new Response("Failed to delete Notebook", {status: 400});
+        return new Response("Failed to delete Todo", {status: 400});
     }
 }

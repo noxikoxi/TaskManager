@@ -1,6 +1,6 @@
 'use client'
 
-import {usePathname, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {toast} from "sonner";
 import { Note} from "@/lib/types";
 import NoteCard from "@/components/NoteCard";
@@ -10,9 +10,8 @@ import {useState} from "react";
 import ItemCard from "@/components/ItemCard";
 import NoteForm from "@/components/forms/NoteForm";
 
-export default function Home() {
-    const pathname = usePathname();
-    const id = pathname.split("/")[3];
+export default function Home({params} : {params : {id: string}}) {
+    const id = params.id;
     const router = useRouter();
 
     const [showUpdateCard, setShowUpdateCard] = useState<boolean>(false);
@@ -77,6 +76,7 @@ export default function Home() {
                           noteId={selectedNote?._id}
                           noteTitle={selectedNote?.title}
                           noteContent={selectedNote?.content}
+                          notebookId={id}
                 />
 
                 </ItemCard> }

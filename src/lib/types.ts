@@ -49,12 +49,15 @@ export type UpdateUserRequest = {
 
 export type TodoItem = {
     _id: string,
-    points: {
-        _id: string,
-        content: string,
-        isDone: boolean,
-        isImportant: boolean
-    }
+    points: [
+        {
+            _id: string,
+            content: string,
+            isDone: boolean,
+            isImportant: boolean
+        }
+    ]
+    content: string,
     isDone: boolean,
     isImportant: boolean
 }
@@ -64,5 +67,5 @@ export type Todo = {
     name: string,
     description: string,
     createdAt: Date,
-    items: [] | TodoItem[],
+    items: TodoItem[],
 }

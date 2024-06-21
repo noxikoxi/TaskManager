@@ -6,7 +6,7 @@ import React, {Dispatch, SetStateAction} from "react";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useCreateNotebook, useUpdateNotebook} from "@/lib/client/NotebookHooks";
-import {CreateItemProps} from "@/components/ItemCard";
+import {NotebookForm as FormData} from "@/lib/types";
 
 const formSchema = z.object({
     name: z.string().min(1, "Name must have at least 1 character").max(60, "Name cannot exceed 60 letters"),
@@ -15,7 +15,7 @@ const formSchema = z.object({
 
 export type createNotebookForm = z.infer<typeof formSchema>;
 
-export type CreateItemProps = {
+type CreateItemProps = {
     showCard: Dispatch<SetStateAction<boolean>>,
     id?: string,
     name?: string,
@@ -34,7 +34,7 @@ const NotebookForm: React.FC<CreateItemProps> = ({name, description, id, showCar
     const {createNotebook, isLoading: isLoadingCreating} = useCreateNotebook();
     const {updateNotebook, isLoading: isLoadingUpdating} = useUpdateNotebook();
 
-    const handleSubmit = (data: NotebookForm) => {
+    const handleSubmit = (data: FormData) => {
         if(id){ // updating
             updateNotebook({...data, id});
             showCard(false)

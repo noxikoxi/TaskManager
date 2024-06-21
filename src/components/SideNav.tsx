@@ -1,7 +1,7 @@
 'use client'
 
 import {Separator} from "@/components/ui/separator";
-import {ListTodo, UserRound, Car, CalendarDays, CircleUserRound, Notebook} from "lucide-react";
+import {ListTodo, UserRound, Car, CalendarDays, CircleUserRound, Notebook, Power} from "lucide-react";
 import NavLink from "@/components/NavLink";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Button} from "@/components/ui/button";
@@ -42,8 +42,9 @@ const SideNav = () => {
             </div>
             <div className="flex flex-col items-center mb-10 gap-4">
                 <ModeToggle/>
-                <Button variant="ghost" className="w-3/4 bg-accent hover:bg-accent/80 rounded-full font-semibold " onClick={() => router.push("/api/auth/logout")}>
-                    Log Out
+                <Button variant="ghost" className="w-3/4 bg-accent hover:bg-accent/80 rounded-full gap-2" onClick={() => router.push("/api/auth/logout")}>
+                    <Power size={18} strokeWidth={3}/>
+                    <span className="font-semibold">Log Out</span>
                 </Button>
             </div>
 

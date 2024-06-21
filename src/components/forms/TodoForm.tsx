@@ -5,7 +5,8 @@ import {Button} from "@/components/ui/button";
 import React, {Dispatch, SetStateAction} from "react";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {CreateItemProps} from "@/components/ItemCard";
+import {useCreateTodo, useUpdateTodo} from "@/lib/client/TodoHooks";
+import {usePathname, useRouter} from "next/navigation";
 
 const formSchema = z.object({
     name: z.string().min(1, "Name must have at least 1 character").max(60, "Name cannot exceed 60 letters"),
@@ -30,14 +31,22 @@ const TodoForm: React.FC<CreateItemProps> = ({name, description, id, showCard}) 
         },
     });
 
+    const router = useRouter();
+
     // const {createNotebook, isLoading: isLoadingCreating} = useCreateNotebook();
     // const {updateNotebook, isLoading: isLoadingUpdating} = useUpdateNotebook();
-    //
-    const handleSubmit = () => {
+    const {createTodo, isLoading : isLoadingCreating} = useCreateTodo();
+    const {updateTodo, isLoading : isLoadingUpdating} = useUpdateTodo();
+
+    const handleSubmit = (data: createTodoForm) => {
         if(id){ // updating
+            updateTodo(Object.assign(data, {_id: id}));
+            router.refresh();
             showCard(false)
         }else{ // creating
-            showCard(false)
+            createTodo(data);
+            router.refresh();
+            showCard(false);
         }
     }
 

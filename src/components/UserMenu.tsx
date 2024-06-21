@@ -34,6 +34,11 @@ const UserMenu = () => {
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
+                    <Link href="/dashboard/todo">
+                        Todos
+                    </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
                     <Link href="/api/auth/logout" className="font-bold text-xl">
                         Log Out
                     </Link>

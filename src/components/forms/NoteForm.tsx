@@ -14,7 +14,8 @@ type Props = {
     showCard: Dispatch<SetStateAction<boolean>>,
     noteId?: string,
     noteTitle?: string,
-    noteContent?: string
+    noteContent?: string,
+    notebookId: string,
 }
 
 const formSchema = z.object({
@@ -24,7 +25,7 @@ const formSchema = z.object({
 
 export type createNoteForm = z.infer<typeof formSchema>;
 
-const NoteForm = ({showCard, noteTitle, noteId, noteContent} : Props) => {
+const NoteForm = ({showCard, noteTitle, noteId, noteContent, notebookId} : Props) => {
     const form = useForm<createNoteForm>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -39,7 +40,7 @@ const NoteForm = ({showCard, noteTitle, noteId, noteContent} : Props) => {
 
     const handleCreateNote = (formData: noteForm) => {
         createNote({
-            id,
+            id : notebookId,
             title : formData.title,
             content : formData.content
         });
@@ -48,7 +49,7 @@ const NoteForm = ({showCard, noteTitle, noteId, noteContent} : Props) => {
 
     const handleUpdateNote = (formData: noteForm) => {
         updateNote({
-            id,
+            id: notebookId,
             noteId,
             title: formData.title,
             content: formData.content
@@ -58,7 +59,7 @@ const NoteForm = ({showCard, noteTitle, noteId, noteContent} : Props) => {
 
     const handleDeleteNote = () => {
         if(noteId) {
-            deleteNote({notebookId: id, noteId});
+            deleteNote({notebookId, noteId});
         }
         showCard(false);
     }

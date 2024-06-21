@@ -9,7 +9,7 @@ import BreadCrumb from "@/components/BreadCrumb";
 import {NotebookForm as NotebookFormType} from "@/lib/types";
 import NotebookForm from '@/components/forms/NotebookForm';
 import NoteForm from "@/components/forms/NoteForm";
-import TodoForm from "@/components/forms/TodoForm";
+import TodoForm, {createTodoForm} from "@/components/forms/TodoForm";
 
 type Props = {
     options?: {
@@ -24,10 +24,13 @@ type Props = {
     textList: string[]
 
     notebook?: NotebookFormType & {id: string}
+
+    todo?: createTodoForm & {_id: string}
 }
 
-const DashboardTopBar = ({options, linkList, textList, notebook} : Props) => {
+const DashboardTopBar = ({options, linkList, textList, notebook, todo} : Props) => {
     const [showCard, setShowCard] = useState<boolean>(false );
+    const [showUpdateCard, setShowUpdateCard] = useState<boolean>(false );
 
     const renderText = () => {
         if(options?.Notebooks){
@@ -39,6 +42,14 @@ const DashboardTopBar = ({options, linkList, textList, notebook} : Props) => {
         }
     }
 
+    const renderUpdateText = () => {
+        if(options?.Notes && notebook){
+            return "Edit Notebook"
+        }else if(options?.Todo && todo){
+            return "Edit Todo"
+        }
+    }
+
 
     return (
         <div className="md:relative absolute -mt-16 md:mt-0 top-1 left-20 w-auto md:top-0 md:left-0 bg-transparent flex flex-col md:w-full md:bg-background border-black">
@@ -47,8 +58,9 @@ const DashboardTopBar = ({options, linkList, textList, notebook} : Props) => {
                     <div className="ms-0 md:ms-10 hidden lg:block">
                         <BreadCrumb linkList={linkList} textList={textList}/>
                     </div>
-                    {options && (
+                    {options  && (
                         <div className="flex flex-row gap-4 lg:ms-0 md:ms-5 ms-0">
+                            {!todo && (
                             <Button
                                 size="sm"
                                 variant="secondary"
@@ -56,14 +68,15 @@ const DashboardTopBar = ({options, linkList, textList, notebook} : Props) => {
                             >
                                 {renderText()}
                             </Button>
+                            )}
 
-                            {options?.Notes && (
+                            {options.Notes || options.Todo && todo && (
                                 <Button
                                     size="sm"
                                     variant="secondary"
-                                    onClick={() => setShowCard(true)}
+                                    onClick={() => setShowUpdateCard(true)}
                                 >
-                                    Edit Current Notebook
+                                    {renderUpdateText()}
                                 </Button>
                             )}
                         </div>
@@ -75,7 +88,7 @@ const DashboardTopBar = ({options, linkList, textList, notebook} : Props) => {
                 </div>
             </div>
             <Separator className="bg-border hidden md:block"/>
-            {options?.Notebooks && showCard && <ItemCard
+            {options?.Notebooks  && showCard && <ItemCard
                 showCard={setShowCard}
                 title="Create Notebook"
                 description="On notebooks you can write your notes"
@@ -83,21 +96,21 @@ const DashboardTopBar = ({options, linkList, textList, notebook} : Props) => {
             >
                 <NotebookForm showCard={setShowCard}/>
             </ItemCard>}
-            {options?.Notes && notebook && showCard && <ItemCard
-                showCard={setShowCard}
+            {options?.Notes && notebook && showUpdateCard && <ItemCard
+                showCard={setShowUpdateCard}
                 title="Edit Notebook"
                 description="On notebooks you can write your notes"
                 size="default"
             >
-                <NotebookForm showCard={setShowCard} id={notebook.id} name={notebook.name} description={notebook.description}/>
+                <NotebookForm showCard={setShowUpdateCard} id={notebook.id} name={notebook.name} description={notebook.description}/>
             </ItemCard>}
-            {options?.Notes && showCard && <ItemCard
+            {options?.Notes && notebook && showCard && <ItemCard
                 showCard={setShowCard}
                 description="Write anything you want"
                 title="Create your Note"
                 size="lg"
             >
-                <NoteForm showCard={setShowCard}/>
+                <NoteForm showCard={setShowCard} notebookId={notebook.id} />
             </ItemCard>}
             {options?.Todo && showCard && <ItemCard
                 showCard={setShowCard}
@@ -106,6 +119,15 @@ const DashboardTopBar = ({options, linkList, textList, notebook} : Props) => {
                 size="default"
             >
                 <TodoForm showCard={setShowCard}/>
+            </ItemCard>}
+
+            {options?.Todo && todo && showUpdateCard && <ItemCard
+                showCard={setShowUpdateCard}
+                description="Plan you tasks"
+                title="Edit your todo list"
+                size="default"
+            >
+                <TodoForm showCard={setShowUpdateCard} name={todo.name} description={todo.description} id={todo._id}/>
             </ItemCard>}
         </div>
 

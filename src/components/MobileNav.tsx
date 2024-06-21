@@ -1,7 +1,7 @@
 'use client'
 
 import {Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
-import {CalendarDays, Car, LayoutDashboard, ListTodo, SquareMenu, UserRound} from "lucide-react";
+import {CalendarDays, Car, LayoutDashboard, ListTodo, Power, SquareMenu, UserRound} from "lucide-react";
 import {Separator} from "@/components/ui/separator";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
@@ -46,15 +46,15 @@ const MobileNav = () => {
                         <ModeToggle/>
 
                         {user ? (
-                            <Button variant="ghost" className="w-full bg-accent hover:bg-accent/90">
-                            <Link href="/api/auth/logout">Log Out</Link>
-
-                        </Button>
+                            <Button variant="ghost" className="w-full bg-accent hover:bg-accent/90 gap-1">
+                                <Power size={16} strokeWidth={3}/>
+                                <Link href="/api/auth/logout">Log Out</Link>
+                            </Button>
                         ) : (
-                        <Button className="w-full font-bold text-white hover:text-orange-300">
-                            <Link href="/api/auth/login" className="font-semibold">Log In</Link>
+                            <Button className="w-full font-bold text-white hover:text-orange-300">
+                                <Link href="/api/auth/login" className="font-semibold">Log In</Link>
 
-                        </Button>
+                            </Button>
                         )}
                     </div>
                 </SheetDescription>

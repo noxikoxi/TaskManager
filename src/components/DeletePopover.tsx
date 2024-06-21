@@ -8,22 +8,18 @@ import {Button} from "@/components/ui/button";
 import React from "react";
 
 type Props = {
-    onClick: (event: React.MouseEvent<HTMLButtonElement>) => void,
-    className?: string
+    onClick: (event: React.MouseEvent, id: string) => void,
+    className?: string,
+    children: React.ReactNode
+    id: string;
 }
 
-const DeletePopover : React.FC<Props> = ({onClick, className} : Props) => {
+const DeletePopover : React.FC<Props> = ({onClick, className, children, id} : Props) => {
     return (
         <div className={className}>
             <Popover>
                 <PopoverTrigger asChild>
-                    <Button
-                        variant="secondary"
-                        onClick={(event) => event.stopPropagation()}
-                        type="button"
-                    >
-                        Delete
-                    </Button>
+                    {children}
                 </PopoverTrigger>
                 <PopoverContent>
                     <div className="flex flex-col gap-1">
@@ -32,7 +28,7 @@ const DeletePopover : React.FC<Props> = ({onClick, className} : Props) => {
                         <span>You will <span className="underline">lose</span> your data.</span>
                         <Button
                             variant="destructive"
-                            onClick={onClick}
+                            onClick={(event) => onClick(event, id)}
                             type="button"
                             className="mt-2"
                         >
