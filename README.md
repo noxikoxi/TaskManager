@@ -21,9 +21,9 @@ You may check this app:
 - **User Profiles**: Create and manage your user profile.
 - **Notebooks**: Create multiple notebooks to organize your notes.
 - **Notes**: Add, view, and manage notes within your notebooks.
+- **TODO Lists**: Create and manage your task lists.
 
 ### Planned Features
-- **TODO Lists**: Create and manage your task lists.
 - **Calendar Tabs**: Plan your schedule with integrated calendar views.
 - **Insurance and Car Maintenance**: Set reminders for insurance renewals and car maintenance checks.
 
