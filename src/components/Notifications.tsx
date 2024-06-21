@@ -6,20 +6,22 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import {useUser} from "@auth0/nextjs-auth0/client";
-import Link from "next/link";
 import {Bell, ChevronDown} from "lucide-react";
-import {Separator} from "@/components/ui/separator";
+import {cn} from "@/lib/utils";
 
-const Notifications = () => {
+type Props = {
+    className? : string
+}
+
+const Notifications = ({className} : Props) => {
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger className="flex flex-row gap-1 font-semibold items-center">
+            <DropdownMenuTrigger className={cn("flex flex-row gap-1 font-semibold items-center", className)}>
                 <Bell size={22} />
                 <span>Notifications</span>
                 <ChevronDown size={22}/>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="font-semibold">
+            <DropdownMenuContent className="font-semibold text-foreground">
                 <DropdownMenuLabel>
                     Notifications
                 </DropdownMenuLabel>

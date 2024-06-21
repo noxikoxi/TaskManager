@@ -50,7 +50,7 @@ export const useCreateTodo = () => {
 export const useUpdateTodo = () => {
     const createUpdateTodoRequest = async (formData: createTodoForm & {_id : string}) => {
 
-        const response = await fetch(API_BASE_URL + '/todos/' + formData._id, {
+        const response = await fetch(API_BASE_URL + '/dashboard/todos/' + formData._id, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

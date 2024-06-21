@@ -22,7 +22,7 @@ const MobileNav = () => {
                 <SheetHeader>
                     <SheetTitle>
                         {user ? (
-                            <span className="flex flex-row gap-1 text-2xl font-semibold">
+                            <span className="flex flex-row gap-1 text-2xl font-semibold text-secondary-foreground">
                                 Hello {" "}
                                 {user.username}
                             </span>
@@ -38,26 +38,25 @@ const MobileNav = () => {
                     <NavLink linkText="Todos" linkUrl="/dashboard/todo" Svg={ListTodo}/>
                     <NavLink linkText="Inspection & Insurance" linkUrl="/dashboard/insurance" Svg={Car}/>
                     <NavLink linkText="Calendar" linkUrl="/dashboard/calendar" Svg={CalendarDays}/>
-                    <div className="ps-10">
-                        <Notifications/>
-                    </div>
-
-                    <div className="my-10 flex flex-col items-center gap-3 ">
-                        <ModeToggle/>
-
-                        {user ? (
-                            <Button variant="ghost" className="w-full bg-accent hover:bg-accent/90 gap-1">
-                                <Power size={16} strokeWidth={3}/>
-                                <Link href="/api/auth/logout">Log Out</Link>
-                            </Button>
-                        ) : (
-                            <Button className="w-full font-bold text-white hover:text-orange-300">
-                                <Link href="/api/auth/login" className="font-semibold">Log In</Link>
-
-                            </Button>
-                        )}
-                    </div>
                 </SheetDescription>
+
+                <Notifications className="ps-10 mt-3 text-black text-xl gap-3"/>
+
+                <div className="my-10 flex flex-col items-center gap-3 text-accent-foreground ">
+                    <ModeToggle/>
+
+                    {user ? (
+                        <Button variant="ghost" className="w-full  bg-accent hover:bg-accent/90 gap-1">
+                            <Power size={16} strokeWidth={3}/>
+                            <Link href="/api/auth/logout">Log Out</Link>
+                        </Button>
+                    ) : (
+                        <Button className="w-full font-bold">
+                            <Link href="/api/auth/login" className="font-semibold">Log In</Link>
+
+                        </Button>
+                    )}
+                </div>
             </SheetContent>
         </Sheet>
     );

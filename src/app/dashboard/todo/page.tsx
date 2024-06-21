@@ -5,9 +5,9 @@ import {getTodos} from "@/lib/actions";
 export default async function Home() {
 
     const todos = await getTodos();
-
+    console.log(todos);
     return (
-        <div>
+        <div className="relative inset-0 h-full w-full">
             <DashboardTopBar
                 linkList={["/dashboard/todo"]}
                 textList={["Todos"]}
@@ -16,7 +16,7 @@ export default async function Home() {
                     Notes: false,
                     Todo: true
                 }}
-            ></DashboardTopBar>
+            />
             <Content todos={todos}/>
         </div>
     )

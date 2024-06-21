@@ -52,8 +52,8 @@ const DashboardTopBar = ({options, linkList, textList, notebook, todo} : Props) 
 
 
     return (
-        <div className="md:relative absolute -mt-16 md:mt-0 top-1 left-20 w-auto md:top-0 md:left-0 bg-transparent flex flex-col md:w-full md:bg-background border-black">
-            <div className="md:my-6 my-3  flex items-center justify-between">
+        <div className="flex flex-col absolute top-0 left-20 w-auto -mt-[3.8em] bg-transparent md:mt-0 md:relative md:top-0 md:left-0 md:w-full md:bg-background">
+            <div className="md:my-6 my-3 flex items-center justify-between">
                 <div className="flex flex-row gap-5">
                     <div className="ms-0 md:ms-10 hidden lg:block">
                         <BreadCrumb linkList={linkList} textList={textList}/>

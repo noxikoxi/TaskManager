@@ -3,7 +3,7 @@ import dbConnect from "@/lib/dbConnect";
 import Todo from "@/lib/models/todo";
 import {Todo as TodoType} from "@/lib/types";
 
-export const GET = async(req: NextRequest, {params} : {params : {userId: string}}) => {
+export const GET =  async(req: NextRequest, {params} : {params : {userId: string}}) => {
     try{
         await dbConnect();
 

@@ -39,13 +39,14 @@ export const getTodos = async() => {
     if(!session || !session.user){
         return [];
     }
-
     const response = await fetch(API_BASE_URL + '/todos/user/' + session.user.sub, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
+            "Cookie": `${session.idToken}`
         },
     })
+
 
     if(!response.ok){
         return [];

@@ -9,7 +9,7 @@ export default async function Home({ params} : {params: {id:string}}){
     const todo = await getTodo(id);
 
     return (
-        <div>
+        <div className="relative inset-0 h-full w-full">
             <DashboardTopBar
                 linkList={["/dashboard/todo", "/dashboard/todo/" + id]}
                 textList={["Todos", todo.name]}
