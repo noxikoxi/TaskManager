@@ -44,17 +44,17 @@ export const PUT = async(req: NextRequest, {params} : {params : {todoId: string,
             return new Response("Item " + id + " not found", {status: 404} );
         }
 
-        if(data.isImportant || data.isDone){
-            item.isImportant = data.isImportant;
-            item.isDone = data.isDone;
-        }
-
-        if(data.content){
+        if(data.content){ // Add a point
             const point = {
                 content : data.content
             }
             item.points.push(point);
+        }else{ // Update
+            item.isImportant = data.isImportant;
+            item.isDone = data.isDone;
         }
+
+
 
         existingTodo.save();
 

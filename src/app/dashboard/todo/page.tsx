@@ -5,7 +5,6 @@ import {getTodos} from "@/lib/actions";
 export default async function Home() {
 
     const todos = await getTodos();
-    console.log(todos);
     return (
         <div className="relative inset-0 h-full w-full">
             <DashboardTopBar

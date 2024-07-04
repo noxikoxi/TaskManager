@@ -57,6 +57,7 @@ const ItemsTable = ({todo, setSelectedItem, selectedItem} : Props) => {
         event.preventDefault();
         event.stopPropagation();
         const result = await updateTodoItem(todoId, itemId, isImportant, isDone);
+        console.log(result)
         if(result){
             router.refresh();
             toast.success("Successfully updated item")
