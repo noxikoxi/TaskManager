@@ -191,7 +191,7 @@ const UserProfileForm = ({currentUser, onSave, isLoading} : Props) => {
                         <LoadingButton/>
 
                         ) : (
-                        <Button variant="secondary" type="submit" className="w-[25%]">
+                        <Button variant="secondary" type="submit" className="w-[50%]">
                             Update
                         </Button>
                     )}

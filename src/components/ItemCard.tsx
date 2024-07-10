@@ -14,10 +14,10 @@ type Props = {
 }
 
 const CardVariants = {
-    base : "relative w-full h-full",
+    base : "relative w-full h-full overflow-auto",
     size: {
         default: "md:fixed md:h-auto md:top-[20%] md:left-[25%] md:w-[50%]",
-        lg: "lg:fixed lg:h-auto lg:top-[10%] lg:left-[20%] w-full lg:w-[60%]"
+        lg: "lg:fixed lg:h-auto lg:top-[10%] lg:left-[20%] lg:w-[60%]"
 
     }
 }

@@ -92,7 +92,7 @@ const CarForm = ({showCard, car} : Props) => {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(handleSubmit)}
-                className="flex flex-col md:grid gap-5 grid-cols-2 grid-rows-4"
+                className="flex flex-col md:grid gap-3 grid-cols-2 grid-rows-4"
             >
                 <FormField
                     control = {form.control}
