@@ -69,3 +69,16 @@ export type Todo = {
     createdAt: Date,
     items: TodoItem[],
 }
+
+export type Car = {
+    _id: string,
+    brand: string,
+    model: string,
+    registration: string,
+    insuranceTo: Date,
+    inspectionTo: Date,
+    userId: string,
+    description?: string
+    productionYear?: string,
+    insurancePrice?: string
+}

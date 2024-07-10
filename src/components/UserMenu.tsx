@@ -39,10 +39,16 @@ const UserMenu = () => {
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
+                    <Link href="/dashboard/insurance">
+                        Insurance
+                    </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
                     <Link href="/api/auth/logout" className="font-bold text-xl">
                         Log Out
                     </Link>
                 </DropdownMenuItem>
+
                 <div className="flex flex-row justify-center">
                     <ModeToggle/>
                 </div>

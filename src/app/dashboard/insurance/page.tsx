@@ -1,20 +1,25 @@
-'use client'
+import DashboardTopBar from "@/components/DashboardTopBar";
+import Content from "@/app/dashboard/insurance/content";
+import {getCars} from "@/lib/Actions/CarActions";
 
-import {useContext, useEffect} from "react";
-import {SideNavContext} from "@/lib/Context/SideNavContext";
-import NotebookForm from "@/components/forms/NotebookForm";
+export default async function Home() {
 
-export default function Home() {
+    const userCars = await getCars();
 
-    const {changeActive} = useContext(SideNavContext);
-
-    useEffect(() => {
-        changeActive("Inspection & Insurance")
-    }, []);
 
     return (
-        <div className="container">
-            <span> In building...</span>
+        <div className="relative inset-0 h-full w-full">
+            <DashboardTopBar
+                linkList={["/dashboard/insurance"]}
+                textList={["Inspection & Insurance"]}
+                options={{
+                    Car: true,
+                    Notes: false,
+                    Todo: false,
+                    Notebooks: false
+                }}
+            />
+            <Content cars={userCars}/>
         </div>
     )
 };

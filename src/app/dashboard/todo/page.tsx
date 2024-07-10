@@ -13,7 +13,8 @@ export default async function Home() {
                 options={{
                     Notebooks: false,
                     Notes: false,
-                    Todo: true
+                    Todo: true,
+                    Car: false
                 }}
             />
             <Content todos={todos}/>

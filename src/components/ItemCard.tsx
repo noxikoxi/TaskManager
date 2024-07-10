@@ -16,8 +16,8 @@ type Props = {
 const CardVariants = {
     base : "relative w-full h-full",
     size: {
-        default: "md:fixed md:h-auto md:top-1/3 md:left-[35%] md:w-[500px]",
-        lg: "lg:fixed lg:h-auto lg:top-[10%] lg:left-[20%] w-full lg:w-[800px] xl:w-[1000px]"
+        default: "md:fixed md:h-auto md:top-[20%] md:left-[25%] md:w-[50%]",
+        lg: "lg:fixed lg:h-auto lg:top-[10%] lg:left-[20%] w-full lg:w-[60%]"
 
     }
 }

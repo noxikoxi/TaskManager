@@ -10,12 +10,14 @@ import {NotebookForm as NotebookFormType} from "@/lib/types";
 import NotebookForm from '@/components/forms/NotebookForm';
 import NoteForm from "@/components/forms/NoteForm";
 import TodoForm, {createTodoForm} from "@/components/forms/TodoForm";
+import CarForm from "@/components/forms/CarForm";
 
 type Props = {
     options?: {
         Notebooks: boolean,
         Notes: boolean,
-        Todo: boolean
+        Todo: boolean,
+        Car: boolean
     }
     // List of links
     linkList: string[],
@@ -39,6 +41,8 @@ const DashboardTopBar = ({options, linkList, textList, notebook, todo} : Props) 
             return "Create Note"
         }else if(options?.Todo){
             return "Create Todo"
+        }else if(options?.Car){
+            return "Add Car"
         }
     }
 
@@ -114,7 +118,7 @@ const DashboardTopBar = ({options, linkList, textList, notebook, todo} : Props) 
             </ItemCard>}
             {options?.Todo && showCard && <ItemCard
                 showCard={setShowCard}
-                description="Plan you tasks"
+                description="Plan your tasks"
                 title="Create your todo list"
                 size="default"
             >
@@ -123,12 +127,23 @@ const DashboardTopBar = ({options, linkList, textList, notebook, todo} : Props) 
 
             {options?.Todo && todo && showUpdateCard && <ItemCard
                 showCard={setShowUpdateCard}
-                description="Plan you tasks"
+                description="Plan your tasks"
                 title="Edit your todo list"
                 size="default"
             >
                 <TodoForm showCard={setShowUpdateCard} name={todo.name} description={todo.description} id={todo._id}/>
             </ItemCard>}
+
+            {options?.Car && showCard && <ItemCard
+                showCard={setShowCard}
+                description="Enter your car informations"
+                title="Add your car"
+                size="lg"
+            >
+                <CarForm showCard={setShowCard}/>
+            </ItemCard>}
+
+
         </div>
 
     )

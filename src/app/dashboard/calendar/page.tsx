@@ -2,6 +2,7 @@
 
 import {useContext, useEffect} from "react";
 import {SideNavContext} from "@/lib/Context/SideNavContext";
+import DashboardTopBar from "@/components/DashboardTopBar";
 
 
 export default function Home() {
@@ -13,6 +14,12 @@ export default function Home() {
     }, []);
 
     return (
-        <span> In building...</span>
+        <div className="relative inset-0">
+        <DashboardTopBar
+            linkList={["/dashboard/calendar"]}
+            textList={["Calendar"]}
+        />
+        <span className="p-10"> In building...</span>
+        </div>
     )
 };

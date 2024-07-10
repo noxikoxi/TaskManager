@@ -4,7 +4,7 @@ import UserProfileForm from "@/components/forms/UserProfileForm";
 import {useGetCurrentUser, useUpdateUser} from "@/lib/client/UserHooks";
 import {useContext, useEffect} from "react";
 import {SideNavContext} from "@/lib/Context/SideNavContext";
-import user_bg from "../../../../public/user_bg5.svg";
+import user_bg from "../../../../public/user_bg4.svg";
 import Image from "next/image";
 import {CircleUserRound} from "lucide-react";
 
@@ -43,7 +43,7 @@ export default function Home() {
                     <div className="absolute top-0 h-2/5">
                         <Image src={user_bg} alt="Profile Backgorund"  className="rounded object-cover h-full" />
                     </div>
-                    <div className="flex flex-col items-center mt-20 border-2 border-b-0 ">
+                    <div className="flex flex-col items-center mt-20">
                         <Avatar className="w-[100px] h-[100px]">
                             <AvatarImage src={user.picture}/>
                             <AvatarFallback className="bg-accent">

@@ -26,7 +26,8 @@ export default function Home() {
                 options={{
                     Notebooks: true,
                     Notes: false,
-                    Todo: false
+                    Todo: false,
+                    Car: false
                 }}
                 linkList={["/dashboard/notebooks"]}
                 textList={["Notebooks"]}

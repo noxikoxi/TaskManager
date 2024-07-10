@@ -34,7 +34,8 @@ export default function Home({params} : {params : {id: string}}) {
                 options={{
                     Notebooks: false,
                     Notes: true,
-                    Todo: false
+                    Todo: false,
+                    Car: false
                 }}
                 linkList={["/dashboard/notebooks", ""]}
                 textList={["Notebooks", notebook.name]}
