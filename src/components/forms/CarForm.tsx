@@ -46,8 +46,8 @@ const CarForm = ({showCard, car} : Props) => {
         defaultValues: {
             brand: car?.brand || "",
             description: car?.description || "",
-            inspectionTo: car?.inspectionTo ? new Date(new Date(car.inspectionTo).setDate(new Date(car.inspectionTo).getDate() - 1)) :  new Date(),
-            insuranceTo: car?.insuranceTo ?  new Date(new Date(car.insuranceTo).setDate(new Date(car.insuranceTo).getDate() - 1)) :  new Date(),
+            inspectionTo: car?.inspectionTo ? new Date(new Date(car.inspectionTo).setDate(new Date(car.inspectionTo).getDate())) :  new Date(),
+            insuranceTo: car?.insuranceTo ?  new Date(new Date(car.insuranceTo).setDate(new Date(car.insuranceTo).getDate())) :  new Date(),
             registration: car?.registration || "",
             model: car?.model || "",
             insurancePrice: car?.insurancePrice ? String(car.insurancePrice) : "",
@@ -61,10 +61,10 @@ const CarForm = ({showCard, car} : Props) => {
         if(car && car._id) {
             let result = await deleteCar(car?._id);
             if(result){
-                toast("Succesfully Deleted a Car");
                 router.refresh();
+                toast.success("Succesfully Deleted a Car");
             }else{
-                toast("Something went wrong");
+                toast.error("Something went wrong");
             }
         }
         showCard(false);
@@ -80,9 +80,10 @@ const CarForm = ({showCard, car} : Props) => {
         }
 
         if(result){
-            toast(`Succesfully ${car ? "Updated" : "Created" } a Car`);
+            router.refresh();
+            toast.success(`Succesfully ${car ? "Updated" : "Created" } a Car`);
         }else{
-            toast("Something went wrong");
+            toast.error("Something went wrong");
         }
 
         showCard(false);

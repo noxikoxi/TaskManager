@@ -38,8 +38,8 @@ const CarCard = ({selectCar, showEditing, car} : Props) => {
             <div className="col-span-3">
                 <div className="grid grid-rows-5">
                     <div className="row-span-3 flex flex-col border-b p-5 md:text-xl">
-                        <span className={clsx("flex flex-col items-center lg:flex-row lg:justify-between lg:gap-6", isInsuranceDanger && "text-destructive")}><span className="font-semibold">Insurance valid until:</span>{car.insuranceTo.toString().split('T')[0]}</span>
-                        <span className={clsx("flex flex-col items-center lg:flex-row lg:justify-between", isInspectionDanger && "text-destructive")}><span className="font-semibold">Inspection valid until:</span>{car.inspectionTo.toString().split('T')[0]}</span>
+                        <span className={clsx("flex flex-col items-center lg:flex-row lg:justify-between lg:gap-6", isInsuranceDanger && "text-destructive")}><span className="font-semibold">Insurance valid until:</span>{new Date(car.insuranceTo).toDateString()}</span>
+                        <span className={clsx("flex flex-col items-center lg:flex-row lg:justify-between", isInspectionDanger && "text-destructive")}><span className="font-semibold">Inspection valid until:</span>{new Date(car.inspectionTo).toDateString()}</span>
                         {car.insurancePrice && <span className="flex flex-col items-center lg:flex-row lg:justify-between"><span className="font-semibold">Insurance Price: </span>{String(car.insurancePrice)}</span>}
                     </div>
                     <div className="row-span-2 flex flex-col items-center pt-2">
