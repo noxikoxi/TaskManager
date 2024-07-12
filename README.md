@@ -22,10 +22,11 @@ You may check this app:
 - **Notebooks**: Create multiple notebooks to organize your notes.
 - **Notes**: Add, view, and manage notes within your notebooks.
 - **TODO Lists**: Create and manage your task lists.
+- **Calendar Tabs**: Plan your schedule with integrated calendar views.
+- **Insurance and Car Maintenance**: Save information about your insurance renewals and car maintenance checks.
 
 ### Planned Features
-- **Calendar Tabs**: Plan your schedule with integrated calendar views.
-- **Insurance and Car Maintenance**: Set reminders for insurance renewals and car maintenance checks.
+- Integrate calendar tabs with notifications
 
 ## Installation
 
@@ -68,6 +69,11 @@ You may check this app:
 1. **User Profiles**: Register a new user or log in with your existing credentials.
 2. **Notebooks**: Create a new notebook by navigating to the "Notebooks" section and clicking "Create Notebook".
 3. **Notes**: Within a notebook, click "Create Note" to create a new note.
+4. **Todo**: Create a todo list by navigating to the "Todos" section and clicking "Create Todo'.
+5. **Todo points**: Within a todo list enter point content and click "ADD".
+6. **Todo point subpoints**: Select Todo point and to everything like with todo points.
+7. **Inspection, Insurance**: Create a new notebook by navigating to the "Inspection & Insurance" section and clicking "Add Car".
+8. **Calendar**: Create events for specific dates by navigating to the "Calendar" section and clicking "Create New event"
 
 ## Roadmap
 
@@ -75,6 +81,7 @@ You may check this app:
 - **Phase 2**: Implement TODO lists.
 - **Phase 3**: Add calendar tab for scheduling.
 - **Phase 4**: Integrate reminders for insurance and car maintenance.
+- **Phase 5**: Integrate Notifications with calendar tabs and adding car should also add an Event with insurance. 
 
 ## Contributing
 
