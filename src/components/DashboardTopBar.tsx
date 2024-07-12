@@ -11,13 +11,15 @@ import NotebookForm from '@/components/forms/NotebookForm';
 import NoteForm from "@/components/forms/NoteForm";
 import TodoForm, {createTodoForm} from "@/components/forms/TodoForm";
 import CarForm from "@/components/forms/CarForm";
+import EventForm from "@/components/forms/EventForm";
 
 type Props = {
     options?: {
         Notebooks: boolean,
         Notes: boolean,
         Todo: boolean,
-        Car: boolean
+        Car: boolean,
+        Event: boolean
     }
     // List of links
     linkList: string[],
@@ -43,6 +45,8 @@ const DashboardTopBar = ({options, linkList, textList, notebook, todo} : Props) 
             return "Create Todo"
         }else if(options?.Car){
             return "Add Car"
+        }else if(options?.Event){
+            return "Create New Event"
         }
     }
 
@@ -141,6 +145,15 @@ const DashboardTopBar = ({options, linkList, textList, notebook, todo} : Props) 
                 size="lg"
             >
                 <CarForm showCard={setShowCard}/>
+            </ItemCard>}
+
+            {options?.Event && showCard && <ItemCard
+                showCard={setShowCard}
+                description="Enter event information"
+                title="Schedule your event"
+                size="lg"
+            >
+                <EventForm showCard={setShowCard}/>
             </ItemCard>}
 
 

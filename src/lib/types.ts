@@ -82,3 +82,24 @@ export type Car = {
     productionYear?: string,
     insurancePrice?: string
 }
+
+export type Event = {
+    _id: string,
+    title: string,
+    description: string,
+    date: Date,
+    isImportant: boolean
+}
+
+export type Calendar = {
+    _id: string,
+    month: number,
+    year: number,
+    events: Event[],
+}
+
+export type UserCalendars = {
+    _id: string,
+    userId: string,
+    calendars: Calendar[]
+}

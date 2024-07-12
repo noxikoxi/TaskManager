@@ -16,7 +16,8 @@ export default async function Home() {
                     Car: true,
                     Notes: false,
                     Todo: false,
-                    Notebooks: false
+                    Notebooks: false,
+                    Event: false
                 }}
             />
             <Content cars={userCars}/>

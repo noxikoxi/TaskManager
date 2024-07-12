@@ -17,7 +17,8 @@ export default async function Home({ params} : {params: {id:string}}){
                     Notebooks: false,
                     Notes: false,
                     Todo: true,
-                    Car: false
+                    Car: false,
+                    Event: false
                 }}
                 todo={todo}
             ></DashboardTopBar>
